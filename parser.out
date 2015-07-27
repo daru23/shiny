@@ -1,0 +1,4526 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> begin asign end
+Rule 2     programa -> begin expr end
+Rule 3     programa -> begin seleccion end
+Rule 4     expr -> expr_num
+Rule 5     expr -> alc_var
+Rule 6     expr -> expr_cad
+Rule 7     expr -> expr_func
+Rule 8     expr -> expr_list
+Rule 9     expr -> expr_tabl
+Rule 10    expr -> expr mas expr
+Rule 11    expr -> expr menos expr
+Rule 12    expr -> expr mult expr
+Rule 13    expr -> expr div expr
+Rule 14    expr -> expr mod expr
+Rule 15    expr -> expr exp expr
+Rule 16    alc_var -> expr_var
+Rule 17    alc_var -> expr_var acor expr ccor punto expr_var
+Rule 18    expr -> apar expr cpar
+Rule 19    asign -> variable asignacion algo
+Rule 20    algo -> expr
+Rule 21    algo -> input
+Rule 22    asign -> variable coma asign coma algo
+Rule 23    variable -> var dosptos tipo
+Rule 24    tipo -> int
+Rule 25    tipo -> string
+Rule 26    tipo -> list of int
+Rule 27    tipo -> list of string
+Rule 28    tipo -> table
+Rule 29    expr_num -> num
+Rule 30    expr_num -> leng
+Rule 31    leng -> len apar expr3 cpar
+Rule 32    expr3 -> expr_cad
+Rule 33    expr3 -> expr_list
+Rule 34    expr3 -> expr_tabl
+Rule 35    expr -> menos expr
+Rule 36    expr_var -> var
+Rule 37    expr_cad -> cadena
+Rule 38    expr_list -> lista_simpl
+Rule 39    expr_list -> lista_comp
+Rule 40    lista_simpl -> acor contenido ccor
+Rule 41    contenido -> empty
+Rule 42    contenido -> elementos
+Rule 43    lista_comp -> acor porc definicion porc ccor
+Rule 44    definicion -> lista_comp2
+Rule 45    definicion -> cuantif
+Rule 46    lista_comp2 -> expr dosptos caso_list dosptos expr
+Rule 47    caso_list -> expr_list
+Rule 48    caso_list -> var
+Rule 49    elementos -> elementos coma expr
+Rule 50    elementos -> expr
+Rule 51    expr_list -> expr_list acor expr_num ccor
+Rule 52    expr_list -> range apar expr coma expr cpar
+Rule 53    expr_tabl -> new table acor expr ccor where asignes
+Rule 54    asignes -> variable asignacion algo
+Rule 55    asignes -> asignes coma asignes
+Rule 56    cuantif -> op expr_var dosptos expr dosptos expr
+Rule 57    op -> mas
+Rule 58    op -> menos
+Rule 59    op -> mult
+Rule 60    op -> div
+Rule 61    op -> mod
+Rule 62    op -> exp
+Rule 63    op -> negac
+Rule 64    op -> disyunc
+Rule 65    op -> conjunc
+Rule 66    op -> mayor
+Rule 67    op -> menor
+Rule 68    op -> mayorigual
+Rule 69    op -> menorigual
+Rule 70    op -> igual
+Rule 71    op -> desigual
+Rule 72    condicion -> term_b
+Rule 73    condicion -> booleano
+Rule 74    condicion -> cond_parentizada
+Rule 75    condicion -> binop_bool
+Rule 76    condicion -> negacion
+Rule 77    binop_bool -> condicion conjunc condicion
+Rule 78    binop_bool -> condicion disyunc condicion
+Rule 79    negacion -> negac term_b
+Rule 80    term_b -> true
+Rule 81    term_b -> false
+Rule 82    cond_parentizada -> apar condicion cpar
+Rule 83    booleano -> booleano igual valor
+Rule 84    booleano -> booleano desigual valor
+Rule 85    booleano -> booleano mayor valor
+Rule 86    booleano -> booleano menor valor
+Rule 87    booleano -> booleano mayorigual valor
+Rule 88    booleano -> booleano menorigual valor
+Rule 89    booleano -> valor
+Rule 90    booleano -> bool_parentizado
+Rule 91    valor -> expr_cad
+Rule 92    valor -> expr_num
+Rule 93    valor -> expr_var
+Rule 94    bool_parentizado -> apar booleano cpar
+Rule 95    seleccion -> if condicion then expr else expr
+Rule 96    expr_func -> expr_fby
+Rule 97    expr_func -> expr_tby
+Rule 98    expr_fby -> expr fby expr
+Rule 99    expr_tby -> expr tby varia
+Rule 100   varia -> expr_list
+Rule 101   varia -> expr_var
+Rule 102   empty -> <empty>
+
+Terminals, with rules where they appear
+
+acor                 : 17 40 43 51 53
+apar                 : 18 31 52 82 94
+asignacion           : 19 54
+begin                : 1 2 3
+cadena               : 37
+ccor                 : 17 40 43 51 53
+coma                 : 22 22 49 52 55
+conjunc              : 65 77
+cpar                 : 18 31 52 82 94
+desigual             : 71 84
+disyunc              : 64 78
+div                  : 13 60
+dosptos              : 23 46 46 56 56
+else                 : 95
+end                  : 1 2 3
+error                : 
+exp                  : 15 62
+false                : 81
+fby                  : 98
+if                   : 95
+igual                : 70 83
+input                : 21
+int                  : 24 26
+len                  : 31
+list                 : 26 27
+mas                  : 10 57
+mayor                : 66 85
+mayorigual           : 68 87
+menor                : 67 86
+menorigual           : 69 88
+menos                : 11 35 58
+mod                  : 14 61
+mult                 : 12 59
+negac                : 63 79
+new                  : 53
+num                  : 29
+of                   : 26 27
+porc                 : 43 43
+punto                : 17
+range                : 52
+string               : 25 27
+table                : 28 53
+tby                  : 99
+then                 : 95
+true                 : 80
+var                  : 23 36 48
+where                : 53
+
+Nonterminals, with rules where they appear
+
+alc_var              : 5
+algo                 : 19 22 54
+asign                : 1 22
+asignes              : 53 55 55
+binop_bool           : 75
+bool_parentizado     : 90
+booleano             : 73 83 84 85 86 87 88 94
+caso_list            : 46
+cond_parentizada     : 74
+condicion            : 77 77 78 78 82 95
+contenido            : 40
+cuantif              : 45
+definicion           : 43
+elementos            : 42 49
+empty                : 41
+expr                 : 2 10 10 11 11 12 12 13 13 14 14 15 15 17 18 20 35 46 46 49 50 52 52 53 56 56 95 95 98 98 99
+expr3                : 31
+expr_cad             : 6 32 91
+expr_fby             : 96
+expr_func            : 7
+expr_list            : 8 33 47 51 100
+expr_num             : 4 51 92
+expr_tabl            : 9 34
+expr_tby             : 97
+expr_var             : 16 17 17 56 93 101
+leng                 : 30
+lista_comp           : 39
+lista_comp2          : 44
+lista_simpl          : 38
+negacion             : 76
+op                   : 56
+programa             : 0
+seleccion            : 3
+term_b               : 72 79
+tipo                 : 23
+valor                : 83 84 85 86 87 88 89
+varia                : 99
+variable             : 19 22 54
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . begin asign end
+    (2) programa -> . begin expr end
+    (3) programa -> . begin seleccion end
+
+    begin           shift and go to state 1
+
+    programa                       shift and go to state 2
+
+state 1
+
+    (1) programa -> begin . asign end
+    (2) programa -> begin . expr end
+    (3) programa -> begin . seleccion end
+    (19) asign -> . variable asignacion algo
+    (22) asign -> . variable coma asign coma algo
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (95) seleccion -> . if condicion then expr else expr
+    (23) variable -> . var dosptos tipo
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    if              shift and go to state 7
+    var             shift and go to state 12
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    acor            shift and go to state 28
+
+    expr_list                      shift and go to state 3
+    seleccion                      shift and go to state 4
+    expr_func                      shift and go to state 27
+    expr_fby                       shift and go to state 11
+    alc_var                        shift and go to state 14
+    leng                           shift and go to state 16
+    lista_comp                     shift and go to state 17
+    expr_cad                       shift and go to state 18
+    variable                       shift and go to state 5
+    expr_tby                       shift and go to state 20
+    lista_simpl                    shift and go to state 10
+    expr                           shift and go to state 22
+    expr_var                       shift and go to state 23
+    asign                          shift and go to state 24
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+
+state 2
+
+    (0) S' -> programa .
+
+
+
+state 3
+
+    (8) expr -> expr_list .
+    (51) expr_list -> expr_list . acor expr_num ccor
+
+    mas             reduce using rule 8 (expr -> expr_list .)
+    menos           reduce using rule 8 (expr -> expr_list .)
+    mult            reduce using rule 8 (expr -> expr_list .)
+    div             reduce using rule 8 (expr -> expr_list .)
+    mod             reduce using rule 8 (expr -> expr_list .)
+    exp             reduce using rule 8 (expr -> expr_list .)
+    fby             reduce using rule 8 (expr -> expr_list .)
+    tby             reduce using rule 8 (expr -> expr_list .)
+    end             reduce using rule 8 (expr -> expr_list .)
+    cpar            reduce using rule 8 (expr -> expr_list .)
+    coma            reduce using rule 8 (expr -> expr_list .)
+    ccor            reduce using rule 8 (expr -> expr_list .)
+    dosptos         reduce using rule 8 (expr -> expr_list .)
+    else            reduce using rule 8 (expr -> expr_list .)
+    porc            reduce using rule 8 (expr -> expr_list .)
+    acor            shift and go to state 29
+
+
+state 4
+
+    (3) programa -> begin seleccion . end
+
+    end             shift and go to state 30
+
+
+state 5
+
+    (19) asign -> variable . asignacion algo
+    (22) asign -> variable . coma asign coma algo
+
+    asignacion      shift and go to state 32
+    coma            shift and go to state 31
+
+
+state 6
+
+    (35) expr -> menos . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 34
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 7
+
+    (95) seleccion -> if . condicion then expr else expr
+    (72) condicion -> . term_b
+    (73) condicion -> . booleano
+    (74) condicion -> . cond_parentizada
+    (75) condicion -> . binop_bool
+    (76) condicion -> . negacion
+    (80) term_b -> . true
+    (81) term_b -> . false
+    (83) booleano -> . booleano igual valor
+    (84) booleano -> . booleano desigual valor
+    (85) booleano -> . booleano mayor valor
+    (86) booleano -> . booleano menor valor
+    (87) booleano -> . booleano mayorigual valor
+    (88) booleano -> . booleano menorigual valor
+    (89) booleano -> . valor
+    (90) booleano -> . bool_parentizado
+    (82) cond_parentizada -> . apar condicion cpar
+    (77) binop_bool -> . condicion conjunc condicion
+    (78) binop_bool -> . condicion disyunc condicion
+    (79) negacion -> . negac term_b
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (94) bool_parentizado -> . apar booleano cpar
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    true            shift and go to state 43
+    false           shift and go to state 35
+    apar            shift and go to state 40
+    negac           shift and go to state 49
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    expr_num                       shift and go to state 48
+    term_b                         shift and go to state 46
+    negacion                       shift and go to state 36
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    bool_parentizado               shift and go to state 37
+    condicion                      shift and go to state 38
+    valor                          shift and go to state 39
+    leng                           shift and go to state 16
+    booleano                       shift and go to state 42
+    cond_parentizada               shift and go to state 44
+    binop_bool                     shift and go to state 45
+
+state 8
+
+    (37) expr_cad -> cadena .
+
+    mas             reduce using rule 37 (expr_cad -> cadena .)
+    menos           reduce using rule 37 (expr_cad -> cadena .)
+    mult            reduce using rule 37 (expr_cad -> cadena .)
+    div             reduce using rule 37 (expr_cad -> cadena .)
+    mod             reduce using rule 37 (expr_cad -> cadena .)
+    exp             reduce using rule 37 (expr_cad -> cadena .)
+    fby             reduce using rule 37 (expr_cad -> cadena .)
+    tby             reduce using rule 37 (expr_cad -> cadena .)
+    end             reduce using rule 37 (expr_cad -> cadena .)
+    coma            reduce using rule 37 (expr_cad -> cadena .)
+    igual           reduce using rule 37 (expr_cad -> cadena .)
+    desigual        reduce using rule 37 (expr_cad -> cadena .)
+    mayor           reduce using rule 37 (expr_cad -> cadena .)
+    menor           reduce using rule 37 (expr_cad -> cadena .)
+    mayorigual      reduce using rule 37 (expr_cad -> cadena .)
+    menorigual      reduce using rule 37 (expr_cad -> cadena .)
+    then            reduce using rule 37 (expr_cad -> cadena .)
+    conjunc         reduce using rule 37 (expr_cad -> cadena .)
+    disyunc         reduce using rule 37 (expr_cad -> cadena .)
+    cpar            reduce using rule 37 (expr_cad -> cadena .)
+    ccor            reduce using rule 37 (expr_cad -> cadena .)
+    dosptos         reduce using rule 37 (expr_cad -> cadena .)
+    else            reduce using rule 37 (expr_cad -> cadena .)
+    porc            reduce using rule 37 (expr_cad -> cadena .)
+
+
+state 9
+
+    (52) expr_list -> range . apar expr coma expr cpar
+
+    apar            shift and go to state 50
+
+
+state 10
+
+    (38) expr_list -> lista_simpl .
+
+    acor            reduce using rule 38 (expr_list -> lista_simpl .)
+    ccor            reduce using rule 38 (expr_list -> lista_simpl .)
+    mas             reduce using rule 38 (expr_list -> lista_simpl .)
+    menos           reduce using rule 38 (expr_list -> lista_simpl .)
+    mult            reduce using rule 38 (expr_list -> lista_simpl .)
+    div             reduce using rule 38 (expr_list -> lista_simpl .)
+    mod             reduce using rule 38 (expr_list -> lista_simpl .)
+    exp             reduce using rule 38 (expr_list -> lista_simpl .)
+    fby             reduce using rule 38 (expr_list -> lista_simpl .)
+    tby             reduce using rule 38 (expr_list -> lista_simpl .)
+    else            reduce using rule 38 (expr_list -> lista_simpl .)
+    end             reduce using rule 38 (expr_list -> lista_simpl .)
+    cpar            reduce using rule 38 (expr_list -> lista_simpl .)
+    coma            reduce using rule 38 (expr_list -> lista_simpl .)
+    dosptos         reduce using rule 38 (expr_list -> lista_simpl .)
+    porc            reduce using rule 38 (expr_list -> lista_simpl .)
+
+
+state 11
+
+    (96) expr_func -> expr_fby .
+
+    cpar            reduce using rule 96 (expr_func -> expr_fby .)
+    mas             reduce using rule 96 (expr_func -> expr_fby .)
+    menos           reduce using rule 96 (expr_func -> expr_fby .)
+    mult            reduce using rule 96 (expr_func -> expr_fby .)
+    div             reduce using rule 96 (expr_func -> expr_fby .)
+    mod             reduce using rule 96 (expr_func -> expr_fby .)
+    exp             reduce using rule 96 (expr_func -> expr_fby .)
+    fby             reduce using rule 96 (expr_func -> expr_fby .)
+    tby             reduce using rule 96 (expr_func -> expr_fby .)
+    end             reduce using rule 96 (expr_func -> expr_fby .)
+    coma            reduce using rule 96 (expr_func -> expr_fby .)
+    ccor            reduce using rule 96 (expr_func -> expr_fby .)
+    dosptos         reduce using rule 96 (expr_func -> expr_fby .)
+    else            reduce using rule 96 (expr_func -> expr_fby .)
+    porc            reduce using rule 96 (expr_func -> expr_fby .)
+
+
+state 12
+
+    (23) variable -> var . dosptos tipo
+    (36) expr_var -> var .
+
+    dosptos         shift and go to state 51
+    acor            reduce using rule 36 (expr_var -> var .)
+    end             reduce using rule 36 (expr_var -> var .)
+    mas             reduce using rule 36 (expr_var -> var .)
+    menos           reduce using rule 36 (expr_var -> var .)
+    mult            reduce using rule 36 (expr_var -> var .)
+    div             reduce using rule 36 (expr_var -> var .)
+    mod             reduce using rule 36 (expr_var -> var .)
+    exp             reduce using rule 36 (expr_var -> var .)
+    fby             reduce using rule 36 (expr_var -> var .)
+    tby             reduce using rule 36 (expr_var -> var .)
+
+
+state 13
+
+    (53) expr_tabl -> new . table acor expr ccor where asignes
+
+    table           shift and go to state 52
+
+
+state 14
+
+    (5) expr -> alc_var .
+
+    mas             reduce using rule 5 (expr -> alc_var .)
+    menos           reduce using rule 5 (expr -> alc_var .)
+    mult            reduce using rule 5 (expr -> alc_var .)
+    div             reduce using rule 5 (expr -> alc_var .)
+    mod             reduce using rule 5 (expr -> alc_var .)
+    exp             reduce using rule 5 (expr -> alc_var .)
+    fby             reduce using rule 5 (expr -> alc_var .)
+    tby             reduce using rule 5 (expr -> alc_var .)
+    end             reduce using rule 5 (expr -> alc_var .)
+    cpar            reduce using rule 5 (expr -> alc_var .)
+    coma            reduce using rule 5 (expr -> alc_var .)
+    ccor            reduce using rule 5 (expr -> alc_var .)
+    dosptos         reduce using rule 5 (expr -> alc_var .)
+    else            reduce using rule 5 (expr -> alc_var .)
+    porc            reduce using rule 5 (expr -> alc_var .)
+
+
+state 15
+
+    (18) expr -> apar . expr cpar
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 53
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 16
+
+    (30) expr_num -> leng .
+
+    igual           reduce using rule 30 (expr_num -> leng .)
+    desigual        reduce using rule 30 (expr_num -> leng .)
+    mayor           reduce using rule 30 (expr_num -> leng .)
+    menor           reduce using rule 30 (expr_num -> leng .)
+    mayorigual      reduce using rule 30 (expr_num -> leng .)
+    menorigual      reduce using rule 30 (expr_num -> leng .)
+    then            reduce using rule 30 (expr_num -> leng .)
+    conjunc         reduce using rule 30 (expr_num -> leng .)
+    disyunc         reduce using rule 30 (expr_num -> leng .)
+    cpar            reduce using rule 30 (expr_num -> leng .)
+    end             reduce using rule 30 (expr_num -> leng .)
+    mas             reduce using rule 30 (expr_num -> leng .)
+    menos           reduce using rule 30 (expr_num -> leng .)
+    mult            reduce using rule 30 (expr_num -> leng .)
+    div             reduce using rule 30 (expr_num -> leng .)
+    mod             reduce using rule 30 (expr_num -> leng .)
+    exp             reduce using rule 30 (expr_num -> leng .)
+    fby             reduce using rule 30 (expr_num -> leng .)
+    tby             reduce using rule 30 (expr_num -> leng .)
+    dosptos         reduce using rule 30 (expr_num -> leng .)
+    coma            reduce using rule 30 (expr_num -> leng .)
+    ccor            reduce using rule 30 (expr_num -> leng .)
+    else            reduce using rule 30 (expr_num -> leng .)
+    porc            reduce using rule 30 (expr_num -> leng .)
+
+
+state 17
+
+    (39) expr_list -> lista_comp .
+
+    acor            reduce using rule 39 (expr_list -> lista_comp .)
+    ccor            reduce using rule 39 (expr_list -> lista_comp .)
+    mas             reduce using rule 39 (expr_list -> lista_comp .)
+    menos           reduce using rule 39 (expr_list -> lista_comp .)
+    mult            reduce using rule 39 (expr_list -> lista_comp .)
+    div             reduce using rule 39 (expr_list -> lista_comp .)
+    mod             reduce using rule 39 (expr_list -> lista_comp .)
+    exp             reduce using rule 39 (expr_list -> lista_comp .)
+    fby             reduce using rule 39 (expr_list -> lista_comp .)
+    tby             reduce using rule 39 (expr_list -> lista_comp .)
+    else            reduce using rule 39 (expr_list -> lista_comp .)
+    end             reduce using rule 39 (expr_list -> lista_comp .)
+    cpar            reduce using rule 39 (expr_list -> lista_comp .)
+    coma            reduce using rule 39 (expr_list -> lista_comp .)
+    dosptos         reduce using rule 39 (expr_list -> lista_comp .)
+    porc            reduce using rule 39 (expr_list -> lista_comp .)
+
+
+state 18
+
+    (6) expr -> expr_cad .
+
+    mas             reduce using rule 6 (expr -> expr_cad .)
+    menos           reduce using rule 6 (expr -> expr_cad .)
+    mult            reduce using rule 6 (expr -> expr_cad .)
+    div             reduce using rule 6 (expr -> expr_cad .)
+    mod             reduce using rule 6 (expr -> expr_cad .)
+    exp             reduce using rule 6 (expr -> expr_cad .)
+    fby             reduce using rule 6 (expr -> expr_cad .)
+    tby             reduce using rule 6 (expr -> expr_cad .)
+    end             reduce using rule 6 (expr -> expr_cad .)
+    cpar            reduce using rule 6 (expr -> expr_cad .)
+    coma            reduce using rule 6 (expr -> expr_cad .)
+    ccor            reduce using rule 6 (expr -> expr_cad .)
+    dosptos         reduce using rule 6 (expr -> expr_cad .)
+    else            reduce using rule 6 (expr -> expr_cad .)
+    porc            reduce using rule 6 (expr -> expr_cad .)
+
+
+state 19
+
+    (31) leng -> len . apar expr3 cpar
+
+    apar            shift and go to state 54
+
+
+state 20
+
+    (97) expr_func -> expr_tby .
+
+    cpar            reduce using rule 97 (expr_func -> expr_tby .)
+    mas             reduce using rule 97 (expr_func -> expr_tby .)
+    menos           reduce using rule 97 (expr_func -> expr_tby .)
+    mult            reduce using rule 97 (expr_func -> expr_tby .)
+    div             reduce using rule 97 (expr_func -> expr_tby .)
+    mod             reduce using rule 97 (expr_func -> expr_tby .)
+    exp             reduce using rule 97 (expr_func -> expr_tby .)
+    fby             reduce using rule 97 (expr_func -> expr_tby .)
+    tby             reduce using rule 97 (expr_func -> expr_tby .)
+    end             reduce using rule 97 (expr_func -> expr_tby .)
+    coma            reduce using rule 97 (expr_func -> expr_tby .)
+    ccor            reduce using rule 97 (expr_func -> expr_tby .)
+    dosptos         reduce using rule 97 (expr_func -> expr_tby .)
+    else            reduce using rule 97 (expr_func -> expr_tby .)
+    porc            reduce using rule 97 (expr_func -> expr_tby .)
+
+
+state 21
+
+    (29) expr_num -> num .
+
+    igual           reduce using rule 29 (expr_num -> num .)
+    desigual        reduce using rule 29 (expr_num -> num .)
+    mayor           reduce using rule 29 (expr_num -> num .)
+    menor           reduce using rule 29 (expr_num -> num .)
+    mayorigual      reduce using rule 29 (expr_num -> num .)
+    menorigual      reduce using rule 29 (expr_num -> num .)
+    then            reduce using rule 29 (expr_num -> num .)
+    conjunc         reduce using rule 29 (expr_num -> num .)
+    disyunc         reduce using rule 29 (expr_num -> num .)
+    cpar            reduce using rule 29 (expr_num -> num .)
+    end             reduce using rule 29 (expr_num -> num .)
+    mas             reduce using rule 29 (expr_num -> num .)
+    menos           reduce using rule 29 (expr_num -> num .)
+    mult            reduce using rule 29 (expr_num -> num .)
+    div             reduce using rule 29 (expr_num -> num .)
+    mod             reduce using rule 29 (expr_num -> num .)
+    exp             reduce using rule 29 (expr_num -> num .)
+    fby             reduce using rule 29 (expr_num -> num .)
+    tby             reduce using rule 29 (expr_num -> num .)
+    dosptos         reduce using rule 29 (expr_num -> num .)
+    coma            reduce using rule 29 (expr_num -> num .)
+    ccor            reduce using rule 29 (expr_num -> num .)
+    else            reduce using rule 29 (expr_num -> num .)
+    porc            reduce using rule 29 (expr_num -> num .)
+
+
+state 22
+
+    (2) programa -> begin expr . end
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    end             shift and go to state 56
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 23
+
+    (16) alc_var -> expr_var .
+    (17) alc_var -> expr_var . acor expr ccor punto expr_var
+
+    mas             reduce using rule 16 (alc_var -> expr_var .)
+    menos           reduce using rule 16 (alc_var -> expr_var .)
+    mult            reduce using rule 16 (alc_var -> expr_var .)
+    div             reduce using rule 16 (alc_var -> expr_var .)
+    mod             reduce using rule 16 (alc_var -> expr_var .)
+    exp             reduce using rule 16 (alc_var -> expr_var .)
+    fby             reduce using rule 16 (alc_var -> expr_var .)
+    tby             reduce using rule 16 (alc_var -> expr_var .)
+    porc            reduce using rule 16 (alc_var -> expr_var .)
+    dosptos         reduce using rule 16 (alc_var -> expr_var .)
+    end             reduce using rule 16 (alc_var -> expr_var .)
+    cpar            reduce using rule 16 (alc_var -> expr_var .)
+    coma            reduce using rule 16 (alc_var -> expr_var .)
+    ccor            reduce using rule 16 (alc_var -> expr_var .)
+    else            reduce using rule 16 (alc_var -> expr_var .)
+    acor            shift and go to state 64
+
+
+state 24
+
+    (1) programa -> begin asign . end
+
+    end             shift and go to state 65
+
+
+state 25
+
+    (4) expr -> expr_num .
+
+    mas             reduce using rule 4 (expr -> expr_num .)
+    menos           reduce using rule 4 (expr -> expr_num .)
+    mult            reduce using rule 4 (expr -> expr_num .)
+    div             reduce using rule 4 (expr -> expr_num .)
+    mod             reduce using rule 4 (expr -> expr_num .)
+    exp             reduce using rule 4 (expr -> expr_num .)
+    fby             reduce using rule 4 (expr -> expr_num .)
+    tby             reduce using rule 4 (expr -> expr_num .)
+    end             reduce using rule 4 (expr -> expr_num .)
+    cpar            reduce using rule 4 (expr -> expr_num .)
+    coma            reduce using rule 4 (expr -> expr_num .)
+    ccor            reduce using rule 4 (expr -> expr_num .)
+    dosptos         reduce using rule 4 (expr -> expr_num .)
+    else            reduce using rule 4 (expr -> expr_num .)
+    porc            reduce using rule 4 (expr -> expr_num .)
+
+
+state 26
+
+    (9) expr -> expr_tabl .
+
+    mas             reduce using rule 9 (expr -> expr_tabl .)
+    menos           reduce using rule 9 (expr -> expr_tabl .)
+    mult            reduce using rule 9 (expr -> expr_tabl .)
+    div             reduce using rule 9 (expr -> expr_tabl .)
+    mod             reduce using rule 9 (expr -> expr_tabl .)
+    exp             reduce using rule 9 (expr -> expr_tabl .)
+    fby             reduce using rule 9 (expr -> expr_tabl .)
+    tby             reduce using rule 9 (expr -> expr_tabl .)
+    end             reduce using rule 9 (expr -> expr_tabl .)
+    cpar            reduce using rule 9 (expr -> expr_tabl .)
+    coma            reduce using rule 9 (expr -> expr_tabl .)
+    ccor            reduce using rule 9 (expr -> expr_tabl .)
+    dosptos         reduce using rule 9 (expr -> expr_tabl .)
+    else            reduce using rule 9 (expr -> expr_tabl .)
+    porc            reduce using rule 9 (expr -> expr_tabl .)
+
+
+state 27
+
+    (7) expr -> expr_func .
+
+    mas             reduce using rule 7 (expr -> expr_func .)
+    menos           reduce using rule 7 (expr -> expr_func .)
+    mult            reduce using rule 7 (expr -> expr_func .)
+    div             reduce using rule 7 (expr -> expr_func .)
+    mod             reduce using rule 7 (expr -> expr_func .)
+    exp             reduce using rule 7 (expr -> expr_func .)
+    fby             reduce using rule 7 (expr -> expr_func .)
+    tby             reduce using rule 7 (expr -> expr_func .)
+    end             reduce using rule 7 (expr -> expr_func .)
+    cpar            reduce using rule 7 (expr -> expr_func .)
+    coma            reduce using rule 7 (expr -> expr_func .)
+    ccor            reduce using rule 7 (expr -> expr_func .)
+    dosptos         reduce using rule 7 (expr -> expr_func .)
+    else            reduce using rule 7 (expr -> expr_func .)
+    porc            reduce using rule 7 (expr -> expr_func .)
+
+
+state 28
+
+    (40) lista_simpl -> acor . contenido ccor
+    (43) lista_comp -> acor . porc definicion porc ccor
+    (41) contenido -> . empty
+    (42) contenido -> . elementos
+    (102) empty -> .
+    (49) elementos -> . elementos coma expr
+    (50) elementos -> . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    porc            shift and go to state 66
+    ccor            reduce using rule 102 (empty -> .)
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    contenido                      shift and go to state 67
+    expr                           shift and go to state 69
+    expr_var                       shift and go to state 23
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_cad                       shift and go to state 18
+    lista_simpl                    shift and go to state 10
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    empty                          shift and go to state 70
+    elementos                      shift and go to state 68
+
+state 29
+
+    (51) expr_list -> expr_list acor . expr_num ccor
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (31) leng -> . len apar expr3 cpar
+
+    num             shift and go to state 21
+    len             shift and go to state 19
+
+    expr_num                       shift and go to state 71
+    leng                           shift and go to state 16
+
+state 30
+
+    (3) programa -> begin seleccion end .
+
+    $end            reduce using rule 3 (programa -> begin seleccion end .)
+
+
+state 31
+
+    (22) asign -> variable coma . asign coma algo
+    (19) asign -> . variable asignacion algo
+    (22) asign -> . variable coma asign coma algo
+    (23) variable -> . var dosptos tipo
+
+    var             shift and go to state 72
+
+    variable                       shift and go to state 5
+    asign                          shift and go to state 73
+
+state 32
+
+    (19) asign -> variable asignacion . algo
+    (20) algo -> . expr
+    (21) algo -> . input
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    input           shift and go to state 74
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 75
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    algo                           shift and go to state 76
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 33
+
+    (36) expr_var -> var .
+
+    acor            reduce using rule 36 (expr_var -> var .)
+    mas             reduce using rule 36 (expr_var -> var .)
+    menos           reduce using rule 36 (expr_var -> var .)
+    mult            reduce using rule 36 (expr_var -> var .)
+    div             reduce using rule 36 (expr_var -> var .)
+    mod             reduce using rule 36 (expr_var -> var .)
+    exp             reduce using rule 36 (expr_var -> var .)
+    fby             reduce using rule 36 (expr_var -> var .)
+    tby             reduce using rule 36 (expr_var -> var .)
+    porc            reduce using rule 36 (expr_var -> var .)
+    dosptos         reduce using rule 36 (expr_var -> var .)
+    igual           reduce using rule 36 (expr_var -> var .)
+    desigual        reduce using rule 36 (expr_var -> var .)
+    mayor           reduce using rule 36 (expr_var -> var .)
+    menor           reduce using rule 36 (expr_var -> var .)
+    mayorigual      reduce using rule 36 (expr_var -> var .)
+    menorigual      reduce using rule 36 (expr_var -> var .)
+    then            reduce using rule 36 (expr_var -> var .)
+    conjunc         reduce using rule 36 (expr_var -> var .)
+    disyunc         reduce using rule 36 (expr_var -> var .)
+    cpar            reduce using rule 36 (expr_var -> var .)
+    end             reduce using rule 36 (expr_var -> var .)
+    coma            reduce using rule 36 (expr_var -> var .)
+    ccor            reduce using rule 36 (expr_var -> var .)
+    else            reduce using rule 36 (expr_var -> var .)
+
+
+state 34
+
+    (35) expr -> menos expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 35 (expr -> menos expr .)
+    menos           reduce using rule 35 (expr -> menos expr .)
+    mult            reduce using rule 35 (expr -> menos expr .)
+    div             reduce using rule 35 (expr -> menos expr .)
+    mod             reduce using rule 35 (expr -> menos expr .)
+    exp             reduce using rule 35 (expr -> menos expr .)
+    fby             reduce using rule 35 (expr -> menos expr .)
+    tby             reduce using rule 35 (expr -> menos expr .)
+    end             reduce using rule 35 (expr -> menos expr .)
+    cpar            reduce using rule 35 (expr -> menos expr .)
+    coma            reduce using rule 35 (expr -> menos expr .)
+    ccor            reduce using rule 35 (expr -> menos expr .)
+    dosptos         reduce using rule 35 (expr -> menos expr .)
+    else            reduce using rule 35 (expr -> menos expr .)
+    porc            reduce using rule 35 (expr -> menos expr .)
+
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! mult            [ shift and go to state 62 ]
+  ! div             [ shift and go to state 61 ]
+  ! mod             [ shift and go to state 63 ]
+  ! exp             [ shift and go to state 60 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 35
+
+    (81) term_b -> false .
+
+    conjunc         reduce using rule 81 (term_b -> false .)
+    disyunc         reduce using rule 81 (term_b -> false .)
+    then            reduce using rule 81 (term_b -> false .)
+    cpar            reduce using rule 81 (term_b -> false .)
+
+
+state 36
+
+    (76) condicion -> negacion .
+
+    conjunc         reduce using rule 76 (condicion -> negacion .)
+    disyunc         reduce using rule 76 (condicion -> negacion .)
+    then            reduce using rule 76 (condicion -> negacion .)
+    cpar            reduce using rule 76 (condicion -> negacion .)
+
+
+state 37
+
+    (90) booleano -> bool_parentizado .
+
+    igual           reduce using rule 90 (booleano -> bool_parentizado .)
+    desigual        reduce using rule 90 (booleano -> bool_parentizado .)
+    mayor           reduce using rule 90 (booleano -> bool_parentizado .)
+    menor           reduce using rule 90 (booleano -> bool_parentizado .)
+    mayorigual      reduce using rule 90 (booleano -> bool_parentizado .)
+    menorigual      reduce using rule 90 (booleano -> bool_parentizado .)
+    then            reduce using rule 90 (booleano -> bool_parentizado .)
+    conjunc         reduce using rule 90 (booleano -> bool_parentizado .)
+    disyunc         reduce using rule 90 (booleano -> bool_parentizado .)
+    cpar            reduce using rule 90 (booleano -> bool_parentizado .)
+
+
+state 38
+
+    (95) seleccion -> if condicion . then expr else expr
+    (77) binop_bool -> condicion . conjunc condicion
+    (78) binop_bool -> condicion . disyunc condicion
+
+    then            shift and go to state 77
+    conjunc         shift and go to state 79
+    disyunc         shift and go to state 78
+
+
+state 39
+
+    (89) booleano -> valor .
+
+    igual           reduce using rule 89 (booleano -> valor .)
+    desigual        reduce using rule 89 (booleano -> valor .)
+    mayor           reduce using rule 89 (booleano -> valor .)
+    menor           reduce using rule 89 (booleano -> valor .)
+    mayorigual      reduce using rule 89 (booleano -> valor .)
+    menorigual      reduce using rule 89 (booleano -> valor .)
+    then            reduce using rule 89 (booleano -> valor .)
+    conjunc         reduce using rule 89 (booleano -> valor .)
+    disyunc         reduce using rule 89 (booleano -> valor .)
+    cpar            reduce using rule 89 (booleano -> valor .)
+
+
+state 40
+
+    (82) cond_parentizada -> apar . condicion cpar
+    (94) bool_parentizado -> apar . booleano cpar
+    (72) condicion -> . term_b
+    (73) condicion -> . booleano
+    (74) condicion -> . cond_parentizada
+    (75) condicion -> . binop_bool
+    (76) condicion -> . negacion
+    (83) booleano -> . booleano igual valor
+    (84) booleano -> . booleano desigual valor
+    (85) booleano -> . booleano mayor valor
+    (86) booleano -> . booleano menor valor
+    (87) booleano -> . booleano mayorigual valor
+    (88) booleano -> . booleano menorigual valor
+    (89) booleano -> . valor
+    (90) booleano -> . bool_parentizado
+    (80) term_b -> . true
+    (81) term_b -> . false
+    (82) cond_parentizada -> . apar condicion cpar
+    (77) binop_bool -> . condicion conjunc condicion
+    (78) binop_bool -> . condicion disyunc condicion
+    (79) negacion -> . negac term_b
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (94) bool_parentizado -> . apar booleano cpar
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    true            shift and go to state 43
+    false           shift and go to state 35
+    apar            shift and go to state 40
+    negac           shift and go to state 49
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    expr_num                       shift and go to state 48
+    term_b                         shift and go to state 46
+    negacion                       shift and go to state 36
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    bool_parentizado               shift and go to state 37
+    condicion                      shift and go to state 80
+    valor                          shift and go to state 39
+    leng                           shift and go to state 16
+    booleano                       shift and go to state 81
+    cond_parentizada               shift and go to state 44
+    binop_bool                     shift and go to state 45
+
+state 41
+
+    (91) valor -> expr_cad .
+
+    igual           reduce using rule 91 (valor -> expr_cad .)
+    desigual        reduce using rule 91 (valor -> expr_cad .)
+    mayor           reduce using rule 91 (valor -> expr_cad .)
+    menor           reduce using rule 91 (valor -> expr_cad .)
+    mayorigual      reduce using rule 91 (valor -> expr_cad .)
+    menorigual      reduce using rule 91 (valor -> expr_cad .)
+    then            reduce using rule 91 (valor -> expr_cad .)
+    conjunc         reduce using rule 91 (valor -> expr_cad .)
+    disyunc         reduce using rule 91 (valor -> expr_cad .)
+    cpar            reduce using rule 91 (valor -> expr_cad .)
+
+
+state 42
+
+    (73) condicion -> booleano .
+    (83) booleano -> booleano . igual valor
+    (84) booleano -> booleano . desigual valor
+    (85) booleano -> booleano . mayor valor
+    (86) booleano -> booleano . menor valor
+    (87) booleano -> booleano . mayorigual valor
+    (88) booleano -> booleano . menorigual valor
+
+    conjunc         reduce using rule 73 (condicion -> booleano .)
+    disyunc         reduce using rule 73 (condicion -> booleano .)
+    then            reduce using rule 73 (condicion -> booleano .)
+    cpar            reduce using rule 73 (condicion -> booleano .)
+    igual           shift and go to state 83
+    desigual        shift and go to state 82
+    mayor           shift and go to state 87
+    menor           shift and go to state 84
+    mayorigual      shift and go to state 85
+    menorigual      shift and go to state 86
+
+
+state 43
+
+    (80) term_b -> true .
+
+    conjunc         reduce using rule 80 (term_b -> true .)
+    disyunc         reduce using rule 80 (term_b -> true .)
+    then            reduce using rule 80 (term_b -> true .)
+    cpar            reduce using rule 80 (term_b -> true .)
+
+
+state 44
+
+    (74) condicion -> cond_parentizada .
+
+    conjunc         reduce using rule 74 (condicion -> cond_parentizada .)
+    disyunc         reduce using rule 74 (condicion -> cond_parentizada .)
+    then            reduce using rule 74 (condicion -> cond_parentizada .)
+    cpar            reduce using rule 74 (condicion -> cond_parentizada .)
+
+
+state 45
+
+    (75) condicion -> binop_bool .
+
+    conjunc         reduce using rule 75 (condicion -> binop_bool .)
+    disyunc         reduce using rule 75 (condicion -> binop_bool .)
+    then            reduce using rule 75 (condicion -> binop_bool .)
+    cpar            reduce using rule 75 (condicion -> binop_bool .)
+
+
+state 46
+
+    (72) condicion -> term_b .
+
+    conjunc         reduce using rule 72 (condicion -> term_b .)
+    disyunc         reduce using rule 72 (condicion -> term_b .)
+    then            reduce using rule 72 (condicion -> term_b .)
+    cpar            reduce using rule 72 (condicion -> term_b .)
+
+
+state 47
+
+    (93) valor -> expr_var .
+
+    igual           reduce using rule 93 (valor -> expr_var .)
+    desigual        reduce using rule 93 (valor -> expr_var .)
+    mayor           reduce using rule 93 (valor -> expr_var .)
+    menor           reduce using rule 93 (valor -> expr_var .)
+    mayorigual      reduce using rule 93 (valor -> expr_var .)
+    menorigual      reduce using rule 93 (valor -> expr_var .)
+    then            reduce using rule 93 (valor -> expr_var .)
+    conjunc         reduce using rule 93 (valor -> expr_var .)
+    disyunc         reduce using rule 93 (valor -> expr_var .)
+    cpar            reduce using rule 93 (valor -> expr_var .)
+
+
+state 48
+
+    (92) valor -> expr_num .
+
+    igual           reduce using rule 92 (valor -> expr_num .)
+    desigual        reduce using rule 92 (valor -> expr_num .)
+    mayor           reduce using rule 92 (valor -> expr_num .)
+    menor           reduce using rule 92 (valor -> expr_num .)
+    mayorigual      reduce using rule 92 (valor -> expr_num .)
+    menorigual      reduce using rule 92 (valor -> expr_num .)
+    then            reduce using rule 92 (valor -> expr_num .)
+    conjunc         reduce using rule 92 (valor -> expr_num .)
+    disyunc         reduce using rule 92 (valor -> expr_num .)
+    cpar            reduce using rule 92 (valor -> expr_num .)
+
+
+state 49
+
+    (79) negacion -> negac . term_b
+    (80) term_b -> . true
+    (81) term_b -> . false
+
+    true            shift and go to state 43
+    false           shift and go to state 35
+
+    term_b                         shift and go to state 88
+
+state 50
+
+    (52) expr_list -> range apar . expr coma expr cpar
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 89
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 51
+
+    (23) variable -> var dosptos . tipo
+    (24) tipo -> . int
+    (25) tipo -> . string
+    (26) tipo -> . list of int
+    (27) tipo -> . list of string
+    (28) tipo -> . table
+
+    int             shift and go to state 92
+    string          shift and go to state 90
+    list            shift and go to state 93
+    table           shift and go to state 94
+
+    tipo                           shift and go to state 91
+
+state 52
+
+    (53) expr_tabl -> new table . acor expr ccor where asignes
+
+    acor            shift and go to state 95
+
+
+state 53
+
+    (18) expr -> apar expr . cpar
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    cpar            shift and go to state 96
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 54
+
+    (31) leng -> len apar . expr3 cpar
+    (32) expr3 -> . expr_cad
+    (33) expr3 -> . expr_list
+    (34) expr3 -> . expr_tabl
+    (37) expr_cad -> . cadena
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    acor            shift and go to state 28
+
+    expr_list                      shift and go to state 97
+    lista_comp                     shift and go to state 17
+    expr_cad                       shift and go to state 100
+    expr3                          shift and go to state 99
+    expr_tabl                      shift and go to state 98
+    lista_simpl                    shift and go to state 10
+
+state 55
+
+    (99) expr_tby -> expr tby . varia
+    (100) varia -> . expr_list
+    (101) varia -> . expr_var
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (36) expr_var -> . var
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    range           shift and go to state 9
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    expr_var                       shift and go to state 101
+    lista_comp                     shift and go to state 17
+    varia                          shift and go to state 102
+    expr_list                      shift and go to state 103
+    lista_simpl                    shift and go to state 10
+
+state 56
+
+    (2) programa -> begin expr end .
+
+    $end            reduce using rule 2 (programa -> begin expr end .)
+
+
+state 57
+
+    (98) expr_fby -> expr fby . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 104
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 58
+
+    (10) expr -> expr mas . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 105
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 59
+
+    (11) expr -> expr menos . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 106
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 60
+
+    (15) expr -> expr exp . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 107
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 61
+
+    (13) expr -> expr div . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 108
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 62
+
+    (12) expr -> expr mult . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 109
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 63
+
+    (14) expr -> expr mod . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 110
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 64
+
+    (17) alc_var -> expr_var acor . expr ccor punto expr_var
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 111
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 65
+
+    (1) programa -> begin asign end .
+
+    $end            reduce using rule 1 (programa -> begin asign end .)
+
+
+state 66
+
+    (43) lista_comp -> acor porc . definicion porc ccor
+    (44) definicion -> . lista_comp2
+    (45) definicion -> . cuantif
+    (46) lista_comp2 -> . expr dosptos caso_list dosptos expr
+    (56) cuantif -> . op expr_var dosptos expr dosptos expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (57) op -> . mas
+    (58) op -> . menos
+    (59) op -> . mult
+    (60) op -> . div
+    (61) op -> . mod
+    (62) op -> . exp
+    (63) op -> . negac
+    (64) op -> . disyunc
+    (65) op -> . conjunc
+    (66) op -> . mayor
+    (67) op -> . menor
+    (68) op -> . mayorigual
+    (69) op -> . menorigual
+    (70) op -> . igual
+    (71) op -> . desigual
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 113
+    mas             shift and go to state 117
+    mult            shift and go to state 121
+    div             shift and go to state 130
+    mod             shift and go to state 122
+    exp             shift and go to state 127
+    negac           shift and go to state 123
+    disyunc         shift and go to state 125
+    conjunc         shift and go to state 120
+    mayor           shift and go to state 114
+    menor           shift and go to state 112
+    mayorigual      shift and go to state 128
+    menorigual      shift and go to state 129
+    igual           shift and go to state 115
+    desigual        shift and go to state 118
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    expr_list                      shift and go to state 3
+    expr_func                      shift and go to state 27
+    expr_tby                       shift and go to state 20
+    expr_fby                       shift and go to state 11
+    lista_comp2                    shift and go to state 116
+    alc_var                        shift and go to state 14
+    leng                           shift and go to state 16
+    expr_cad                       shift and go to state 18
+    lista_comp                     shift and go to state 17
+    definicion                     shift and go to state 119
+    lista_simpl                    shift and go to state 10
+    expr                           shift and go to state 124
+    expr_var                       shift and go to state 23
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    cuantif                        shift and go to state 126
+    op                             shift and go to state 131
+
+state 67
+
+    (40) lista_simpl -> acor contenido . ccor
+
+    ccor            shift and go to state 132
+
+
+state 68
+
+    (42) contenido -> elementos .
+    (49) elementos -> elementos . coma expr
+
+    ccor            reduce using rule 42 (contenido -> elementos .)
+    coma            shift and go to state 133
+
+
+state 69
+
+    (50) elementos -> expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    coma            reduce using rule 50 (elementos -> expr .)
+    ccor            reduce using rule 50 (elementos -> expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 70
+
+    (41) contenido -> empty .
+
+    ccor            reduce using rule 41 (contenido -> empty .)
+
+
+state 71
+
+    (51) expr_list -> expr_list acor expr_num . ccor
+
+    ccor            shift and go to state 134
+
+
+state 72
+
+    (23) variable -> var . dosptos tipo
+
+    dosptos         shift and go to state 51
+
+
+state 73
+
+    (22) asign -> variable coma asign . coma algo
+
+    coma            shift and go to state 135
+
+
+state 74
+
+    (21) algo -> input .
+
+    end             reduce using rule 21 (algo -> input .)
+    coma            reduce using rule 21 (algo -> input .)
+    mas             reduce using rule 21 (algo -> input .)
+    menos           reduce using rule 21 (algo -> input .)
+    mult            reduce using rule 21 (algo -> input .)
+    div             reduce using rule 21 (algo -> input .)
+    mod             reduce using rule 21 (algo -> input .)
+    exp             reduce using rule 21 (algo -> input .)
+    fby             reduce using rule 21 (algo -> input .)
+    tby             reduce using rule 21 (algo -> input .)
+    cpar            reduce using rule 21 (algo -> input .)
+    ccor            reduce using rule 21 (algo -> input .)
+    dosptos         reduce using rule 21 (algo -> input .)
+    else            reduce using rule 21 (algo -> input .)
+    porc            reduce using rule 21 (algo -> input .)
+
+
+state 75
+
+    (20) algo -> expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+  ! shift/reduce conflict for mas resolved as shift
+  ! shift/reduce conflict for menos resolved as shift
+  ! shift/reduce conflict for mult resolved as shift
+  ! shift/reduce conflict for div resolved as shift
+  ! shift/reduce conflict for mod resolved as shift
+  ! shift/reduce conflict for exp resolved as shift
+  ! shift/reduce conflict for fby resolved as shift
+  ! shift/reduce conflict for tby resolved as shift
+    end             reduce using rule 20 (algo -> expr .)
+    coma            reduce using rule 20 (algo -> expr .)
+    cpar            reduce using rule 20 (algo -> expr .)
+    ccor            reduce using rule 20 (algo -> expr .)
+    dosptos         reduce using rule 20 (algo -> expr .)
+    else            reduce using rule 20 (algo -> expr .)
+    porc            reduce using rule 20 (algo -> expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+  ! mas             [ reduce using rule 20 (algo -> expr .) ]
+  ! menos           [ reduce using rule 20 (algo -> expr .) ]
+  ! mult            [ reduce using rule 20 (algo -> expr .) ]
+  ! div             [ reduce using rule 20 (algo -> expr .) ]
+  ! mod             [ reduce using rule 20 (algo -> expr .) ]
+  ! exp             [ reduce using rule 20 (algo -> expr .) ]
+  ! fby             [ reduce using rule 20 (algo -> expr .) ]
+  ! tby             [ reduce using rule 20 (algo -> expr .) ]
+
+
+state 76
+
+    (19) asign -> variable asignacion algo .
+
+    end             reduce using rule 19 (asign -> variable asignacion algo .)
+    coma            reduce using rule 19 (asign -> variable asignacion algo .)
+
+
+state 77
+
+    (95) seleccion -> if condicion then . expr else expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 136
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    lista_simpl                    shift and go to state 10
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    expr_func                      shift and go to state 27
+
+state 78
+
+    (78) binop_bool -> condicion disyunc . condicion
+    (72) condicion -> . term_b
+    (73) condicion -> . booleano
+    (74) condicion -> . cond_parentizada
+    (75) condicion -> . binop_bool
+    (76) condicion -> . negacion
+    (80) term_b -> . true
+    (81) term_b -> . false
+    (83) booleano -> . booleano igual valor
+    (84) booleano -> . booleano desigual valor
+    (85) booleano -> . booleano mayor valor
+    (86) booleano -> . booleano menor valor
+    (87) booleano -> . booleano mayorigual valor
+    (88) booleano -> . booleano menorigual valor
+    (89) booleano -> . valor
+    (90) booleano -> . bool_parentizado
+    (82) cond_parentizada -> . apar condicion cpar
+    (77) binop_bool -> . condicion conjunc condicion
+    (78) binop_bool -> . condicion disyunc condicion
+    (79) negacion -> . negac term_b
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (94) bool_parentizado -> . apar booleano cpar
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    true            shift and go to state 43
+    false           shift and go to state 35
+    apar            shift and go to state 40
+    negac           shift and go to state 49
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    expr_num                       shift and go to state 48
+    term_b                         shift and go to state 46
+    negacion                       shift and go to state 36
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    bool_parentizado               shift and go to state 37
+    condicion                      shift and go to state 137
+    valor                          shift and go to state 39
+    leng                           shift and go to state 16
+    booleano                       shift and go to state 42
+    cond_parentizada               shift and go to state 44
+    binop_bool                     shift and go to state 45
+
+state 79
+
+    (77) binop_bool -> condicion conjunc . condicion
+    (72) condicion -> . term_b
+    (73) condicion -> . booleano
+    (74) condicion -> . cond_parentizada
+    (75) condicion -> . binop_bool
+    (76) condicion -> . negacion
+    (80) term_b -> . true
+    (81) term_b -> . false
+    (83) booleano -> . booleano igual valor
+    (84) booleano -> . booleano desigual valor
+    (85) booleano -> . booleano mayor valor
+    (86) booleano -> . booleano menor valor
+    (87) booleano -> . booleano mayorigual valor
+    (88) booleano -> . booleano menorigual valor
+    (89) booleano -> . valor
+    (90) booleano -> . bool_parentizado
+    (82) cond_parentizada -> . apar condicion cpar
+    (77) binop_bool -> . condicion conjunc condicion
+    (78) binop_bool -> . condicion disyunc condicion
+    (79) negacion -> . negac term_b
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (94) bool_parentizado -> . apar booleano cpar
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    true            shift and go to state 43
+    false           shift and go to state 35
+    apar            shift and go to state 40
+    negac           shift and go to state 49
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    expr_num                       shift and go to state 48
+    term_b                         shift and go to state 46
+    negacion                       shift and go to state 36
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    bool_parentizado               shift and go to state 37
+    condicion                      shift and go to state 138
+    valor                          shift and go to state 39
+    leng                           shift and go to state 16
+    booleano                       shift and go to state 42
+    cond_parentizada               shift and go to state 44
+    binop_bool                     shift and go to state 45
+
+state 80
+
+    (82) cond_parentizada -> apar condicion . cpar
+    (77) binop_bool -> condicion . conjunc condicion
+    (78) binop_bool -> condicion . disyunc condicion
+
+    cpar            shift and go to state 139
+    conjunc         shift and go to state 79
+    disyunc         shift and go to state 78
+
+
+state 81
+
+    (94) bool_parentizado -> apar booleano . cpar
+    (73) condicion -> booleano .
+    (83) booleano -> booleano . igual valor
+    (84) booleano -> booleano . desigual valor
+    (85) booleano -> booleano . mayor valor
+    (86) booleano -> booleano . menor valor
+    (87) booleano -> booleano . mayorigual valor
+    (88) booleano -> booleano . menorigual valor
+
+  ! shift/reduce conflict for cpar resolved as shift
+    cpar            shift and go to state 140
+    conjunc         reduce using rule 73 (condicion -> booleano .)
+    disyunc         reduce using rule 73 (condicion -> booleano .)
+    igual           shift and go to state 83
+    desigual        shift and go to state 82
+    mayor           shift and go to state 87
+    menor           shift and go to state 84
+    mayorigual      shift and go to state 85
+    menorigual      shift and go to state 86
+
+  ! cpar            [ reduce using rule 73 (condicion -> booleano .) ]
+
+
+state 82
+
+    (84) booleano -> booleano desigual . valor
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    leng                           shift and go to state 16
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    expr_num                       shift and go to state 48
+    valor                          shift and go to state 141
+
+state 83
+
+    (83) booleano -> booleano igual . valor
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    leng                           shift and go to state 16
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    expr_num                       shift and go to state 48
+    valor                          shift and go to state 142
+
+state 84
+
+    (86) booleano -> booleano menor . valor
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    leng                           shift and go to state 16
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    expr_num                       shift and go to state 48
+    valor                          shift and go to state 143
+
+state 85
+
+    (87) booleano -> booleano mayorigual . valor
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    leng                           shift and go to state 16
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    expr_num                       shift and go to state 48
+    valor                          shift and go to state 144
+
+state 86
+
+    (88) booleano -> booleano menorigual . valor
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    leng                           shift and go to state 16
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    expr_num                       shift and go to state 48
+    valor                          shift and go to state 145
+
+state 87
+
+    (85) booleano -> booleano mayor . valor
+    (91) valor -> . expr_cad
+    (92) valor -> . expr_num
+    (93) valor -> . expr_var
+    (37) expr_cad -> . cadena
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (36) expr_var -> . var
+    (31) leng -> . len apar expr3 cpar
+
+    cadena          shift and go to state 8
+    num             shift and go to state 21
+    var             shift and go to state 33
+    len             shift and go to state 19
+
+    leng                           shift and go to state 16
+    expr_var                       shift and go to state 47
+    expr_cad                       shift and go to state 41
+    expr_num                       shift and go to state 48
+    valor                          shift and go to state 146
+
+state 88
+
+    (79) negacion -> negac term_b .
+
+    then            reduce using rule 79 (negacion -> negac term_b .)
+    conjunc         reduce using rule 79 (negacion -> negac term_b .)
+    disyunc         reduce using rule 79 (negacion -> negac term_b .)
+    cpar            reduce using rule 79 (negacion -> negac term_b .)
+
+
+state 89
+
+    (52) expr_list -> range apar expr . coma expr cpar
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    coma            shift and go to state 147
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 90
+
+    (25) tipo -> string .
+
+    asignacion      reduce using rule 25 (tipo -> string .)
+    coma            reduce using rule 25 (tipo -> string .)
+
+
+state 91
+
+    (23) variable -> var dosptos tipo .
+
+    asignacion      reduce using rule 23 (variable -> var dosptos tipo .)
+    coma            reduce using rule 23 (variable -> var dosptos tipo .)
+
+
+state 92
+
+    (24) tipo -> int .
+
+    asignacion      reduce using rule 24 (tipo -> int .)
+    coma            reduce using rule 24 (tipo -> int .)
+
+
+state 93
+
+    (26) tipo -> list . of int
+    (27) tipo -> list . of string
+
+    of              shift and go to state 148
+
+
+state 94
+
+    (28) tipo -> table .
+
+    asignacion      reduce using rule 28 (tipo -> table .)
+    coma            reduce using rule 28 (tipo -> table .)
+
+
+state 95
+
+    (53) expr_tabl -> new table acor . expr ccor where asignes
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 149
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 96
+
+    (18) expr -> apar expr cpar .
+
+    mas             reduce using rule 18 (expr -> apar expr cpar .)
+    menos           reduce using rule 18 (expr -> apar expr cpar .)
+    mult            reduce using rule 18 (expr -> apar expr cpar .)
+    div             reduce using rule 18 (expr -> apar expr cpar .)
+    mod             reduce using rule 18 (expr -> apar expr cpar .)
+    exp             reduce using rule 18 (expr -> apar expr cpar .)
+    fby             reduce using rule 18 (expr -> apar expr cpar .)
+    tby             reduce using rule 18 (expr -> apar expr cpar .)
+    end             reduce using rule 18 (expr -> apar expr cpar .)
+    cpar            reduce using rule 18 (expr -> apar expr cpar .)
+    coma            reduce using rule 18 (expr -> apar expr cpar .)
+    ccor            reduce using rule 18 (expr -> apar expr cpar .)
+    dosptos         reduce using rule 18 (expr -> apar expr cpar .)
+    else            reduce using rule 18 (expr -> apar expr cpar .)
+    porc            reduce using rule 18 (expr -> apar expr cpar .)
+
+
+state 97
+
+    (33) expr3 -> expr_list .
+    (51) expr_list -> expr_list . acor expr_num ccor
+
+    cpar            reduce using rule 33 (expr3 -> expr_list .)
+    acor            shift and go to state 29
+
+
+state 98
+
+    (34) expr3 -> expr_tabl .
+
+    cpar            reduce using rule 34 (expr3 -> expr_tabl .)
+
+
+state 99
+
+    (31) leng -> len apar expr3 . cpar
+
+    cpar            shift and go to state 150
+
+
+state 100
+
+    (32) expr3 -> expr_cad .
+
+    cpar            reduce using rule 32 (expr3 -> expr_cad .)
+
+
+state 101
+
+    (101) varia -> expr_var .
+
+    end             reduce using rule 101 (varia -> expr_var .)
+    mas             reduce using rule 101 (varia -> expr_var .)
+    menos           reduce using rule 101 (varia -> expr_var .)
+    mult            reduce using rule 101 (varia -> expr_var .)
+    div             reduce using rule 101 (varia -> expr_var .)
+    mod             reduce using rule 101 (varia -> expr_var .)
+    exp             reduce using rule 101 (varia -> expr_var .)
+    fby             reduce using rule 101 (varia -> expr_var .)
+    tby             reduce using rule 101 (varia -> expr_var .)
+    cpar            reduce using rule 101 (varia -> expr_var .)
+    coma            reduce using rule 101 (varia -> expr_var .)
+    ccor            reduce using rule 101 (varia -> expr_var .)
+    dosptos         reduce using rule 101 (varia -> expr_var .)
+    else            reduce using rule 101 (varia -> expr_var .)
+    porc            reduce using rule 101 (varia -> expr_var .)
+
+
+state 102
+
+    (99) expr_tby -> expr tby varia .
+
+    cpar            reduce using rule 99 (expr_tby -> expr tby varia .)
+    mas             reduce using rule 99 (expr_tby -> expr tby varia .)
+    menos           reduce using rule 99 (expr_tby -> expr tby varia .)
+    mult            reduce using rule 99 (expr_tby -> expr tby varia .)
+    div             reduce using rule 99 (expr_tby -> expr tby varia .)
+    mod             reduce using rule 99 (expr_tby -> expr tby varia .)
+    exp             reduce using rule 99 (expr_tby -> expr tby varia .)
+    fby             reduce using rule 99 (expr_tby -> expr tby varia .)
+    tby             reduce using rule 99 (expr_tby -> expr tby varia .)
+    end             reduce using rule 99 (expr_tby -> expr tby varia .)
+    coma            reduce using rule 99 (expr_tby -> expr tby varia .)
+    ccor            reduce using rule 99 (expr_tby -> expr tby varia .)
+    dosptos         reduce using rule 99 (expr_tby -> expr tby varia .)
+    else            reduce using rule 99 (expr_tby -> expr tby varia .)
+    porc            reduce using rule 99 (expr_tby -> expr tby varia .)
+
+
+state 103
+
+    (100) varia -> expr_list .
+    (51) expr_list -> expr_list . acor expr_num ccor
+
+    end             reduce using rule 100 (varia -> expr_list .)
+    mas             reduce using rule 100 (varia -> expr_list .)
+    menos           reduce using rule 100 (varia -> expr_list .)
+    mult            reduce using rule 100 (varia -> expr_list .)
+    div             reduce using rule 100 (varia -> expr_list .)
+    mod             reduce using rule 100 (varia -> expr_list .)
+    exp             reduce using rule 100 (varia -> expr_list .)
+    fby             reduce using rule 100 (varia -> expr_list .)
+    tby             reduce using rule 100 (varia -> expr_list .)
+    cpar            reduce using rule 100 (varia -> expr_list .)
+    coma            reduce using rule 100 (varia -> expr_list .)
+    ccor            reduce using rule 100 (varia -> expr_list .)
+    dosptos         reduce using rule 100 (varia -> expr_list .)
+    else            reduce using rule 100 (varia -> expr_list .)
+    porc            reduce using rule 100 (varia -> expr_list .)
+    acor            shift and go to state 29
+
+
+state 104
+
+    (98) expr_fby -> expr fby expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    cpar            reduce using rule 98 (expr_fby -> expr fby expr .)
+    tby             reduce using rule 98 (expr_fby -> expr fby expr .)
+    dosptos         reduce using rule 98 (expr_fby -> expr fby expr .)
+    end             reduce using rule 98 (expr_fby -> expr fby expr .)
+    coma            reduce using rule 98 (expr_fby -> expr fby expr .)
+    ccor            reduce using rule 98 (expr_fby -> expr fby expr .)
+    else            reduce using rule 98 (expr_fby -> expr fby expr .)
+    porc            reduce using rule 98 (expr_fby -> expr fby expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+
+  ! mas             [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! menos           [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! mult            [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! div             [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! mod             [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! exp             [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! fby             [ reduce using rule 98 (expr_fby -> expr fby expr .) ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 105
+
+    (10) expr -> expr mas expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 10 (expr -> expr mas expr .)
+    menos           reduce using rule 10 (expr -> expr mas expr .)
+    fby             reduce using rule 10 (expr -> expr mas expr .)
+    tby             reduce using rule 10 (expr -> expr mas expr .)
+    end             reduce using rule 10 (expr -> expr mas expr .)
+    cpar            reduce using rule 10 (expr -> expr mas expr .)
+    coma            reduce using rule 10 (expr -> expr mas expr .)
+    ccor            reduce using rule 10 (expr -> expr mas expr .)
+    dosptos         reduce using rule 10 (expr -> expr mas expr .)
+    else            reduce using rule 10 (expr -> expr mas expr .)
+    porc            reduce using rule 10 (expr -> expr mas expr .)
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+
+  ! mult            [ reduce using rule 10 (expr -> expr mas expr .) ]
+  ! div             [ reduce using rule 10 (expr -> expr mas expr .) ]
+  ! mod             [ reduce using rule 10 (expr -> expr mas expr .) ]
+  ! exp             [ reduce using rule 10 (expr -> expr mas expr .) ]
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 106
+
+    (11) expr -> expr menos expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 11 (expr -> expr menos expr .)
+    menos           reduce using rule 11 (expr -> expr menos expr .)
+    fby             reduce using rule 11 (expr -> expr menos expr .)
+    tby             reduce using rule 11 (expr -> expr menos expr .)
+    end             reduce using rule 11 (expr -> expr menos expr .)
+    cpar            reduce using rule 11 (expr -> expr menos expr .)
+    coma            reduce using rule 11 (expr -> expr menos expr .)
+    ccor            reduce using rule 11 (expr -> expr menos expr .)
+    dosptos         reduce using rule 11 (expr -> expr menos expr .)
+    else            reduce using rule 11 (expr -> expr menos expr .)
+    porc            reduce using rule 11 (expr -> expr menos expr .)
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+
+  ! mult            [ reduce using rule 11 (expr -> expr menos expr .) ]
+  ! div             [ reduce using rule 11 (expr -> expr menos expr .) ]
+  ! mod             [ reduce using rule 11 (expr -> expr menos expr .) ]
+  ! exp             [ reduce using rule 11 (expr -> expr menos expr .) ]
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 107
+
+    (15) expr -> expr exp expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 15 (expr -> expr exp expr .)
+    menos           reduce using rule 15 (expr -> expr exp expr .)
+    mult            reduce using rule 15 (expr -> expr exp expr .)
+    div             reduce using rule 15 (expr -> expr exp expr .)
+    mod             reduce using rule 15 (expr -> expr exp expr .)
+    exp             reduce using rule 15 (expr -> expr exp expr .)
+    fby             reduce using rule 15 (expr -> expr exp expr .)
+    tby             reduce using rule 15 (expr -> expr exp expr .)
+    end             reduce using rule 15 (expr -> expr exp expr .)
+    cpar            reduce using rule 15 (expr -> expr exp expr .)
+    coma            reduce using rule 15 (expr -> expr exp expr .)
+    ccor            reduce using rule 15 (expr -> expr exp expr .)
+    dosptos         reduce using rule 15 (expr -> expr exp expr .)
+    else            reduce using rule 15 (expr -> expr exp expr .)
+    porc            reduce using rule 15 (expr -> expr exp expr .)
+
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! mult            [ shift and go to state 62 ]
+  ! div             [ shift and go to state 61 ]
+  ! mod             [ shift and go to state 63 ]
+  ! exp             [ shift and go to state 60 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 108
+
+    (13) expr -> expr div expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 13 (expr -> expr div expr .)
+    menos           reduce using rule 13 (expr -> expr div expr .)
+    mult            reduce using rule 13 (expr -> expr div expr .)
+    div             reduce using rule 13 (expr -> expr div expr .)
+    mod             reduce using rule 13 (expr -> expr div expr .)
+    fby             reduce using rule 13 (expr -> expr div expr .)
+    tby             reduce using rule 13 (expr -> expr div expr .)
+    end             reduce using rule 13 (expr -> expr div expr .)
+    cpar            reduce using rule 13 (expr -> expr div expr .)
+    coma            reduce using rule 13 (expr -> expr div expr .)
+    ccor            reduce using rule 13 (expr -> expr div expr .)
+    dosptos         reduce using rule 13 (expr -> expr div expr .)
+    else            reduce using rule 13 (expr -> expr div expr .)
+    porc            reduce using rule 13 (expr -> expr div expr .)
+    exp             shift and go to state 60
+
+  ! exp             [ reduce using rule 13 (expr -> expr div expr .) ]
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! mult            [ shift and go to state 62 ]
+  ! div             [ shift and go to state 61 ]
+  ! mod             [ shift and go to state 63 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 109
+
+    (12) expr -> expr mult expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 12 (expr -> expr mult expr .)
+    menos           reduce using rule 12 (expr -> expr mult expr .)
+    mult            reduce using rule 12 (expr -> expr mult expr .)
+    div             reduce using rule 12 (expr -> expr mult expr .)
+    mod             reduce using rule 12 (expr -> expr mult expr .)
+    fby             reduce using rule 12 (expr -> expr mult expr .)
+    tby             reduce using rule 12 (expr -> expr mult expr .)
+    end             reduce using rule 12 (expr -> expr mult expr .)
+    cpar            reduce using rule 12 (expr -> expr mult expr .)
+    coma            reduce using rule 12 (expr -> expr mult expr .)
+    ccor            reduce using rule 12 (expr -> expr mult expr .)
+    dosptos         reduce using rule 12 (expr -> expr mult expr .)
+    else            reduce using rule 12 (expr -> expr mult expr .)
+    porc            reduce using rule 12 (expr -> expr mult expr .)
+    exp             shift and go to state 60
+
+  ! exp             [ reduce using rule 12 (expr -> expr mult expr .) ]
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! mult            [ shift and go to state 62 ]
+  ! div             [ shift and go to state 61 ]
+  ! mod             [ shift and go to state 63 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 110
+
+    (14) expr -> expr mod expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    mas             reduce using rule 14 (expr -> expr mod expr .)
+    menos           reduce using rule 14 (expr -> expr mod expr .)
+    mult            reduce using rule 14 (expr -> expr mod expr .)
+    div             reduce using rule 14 (expr -> expr mod expr .)
+    mod             reduce using rule 14 (expr -> expr mod expr .)
+    fby             reduce using rule 14 (expr -> expr mod expr .)
+    tby             reduce using rule 14 (expr -> expr mod expr .)
+    end             reduce using rule 14 (expr -> expr mod expr .)
+    cpar            reduce using rule 14 (expr -> expr mod expr .)
+    coma            reduce using rule 14 (expr -> expr mod expr .)
+    ccor            reduce using rule 14 (expr -> expr mod expr .)
+    dosptos         reduce using rule 14 (expr -> expr mod expr .)
+    else            reduce using rule 14 (expr -> expr mod expr .)
+    porc            reduce using rule 14 (expr -> expr mod expr .)
+    exp             shift and go to state 60
+
+  ! exp             [ reduce using rule 14 (expr -> expr mod expr .) ]
+  ! mas             [ shift and go to state 58 ]
+  ! menos           [ shift and go to state 59 ]
+  ! mult            [ shift and go to state 62 ]
+  ! div             [ shift and go to state 61 ]
+  ! mod             [ shift and go to state 63 ]
+  ! fby             [ shift and go to state 57 ]
+  ! tby             [ shift and go to state 55 ]
+
+
+state 111
+
+    (17) alc_var -> expr_var acor expr . ccor punto expr_var
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    ccor            shift and go to state 151
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 112
+
+    (67) op -> menor .
+
+    var             reduce using rule 67 (op -> menor .)
+
+
+state 113
+
+    (35) expr -> menos . expr
+    (58) op -> menos .
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    var             reduce using rule 58 (op -> menos .)
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    acor            shift and go to state 28
+
+  ! var             [ shift and go to state 33 ]
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 34
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 114
+
+    (66) op -> mayor .
+
+    var             reduce using rule 66 (op -> mayor .)
+
+
+state 115
+
+    (70) op -> igual .
+
+    var             reduce using rule 70 (op -> igual .)
+
+
+state 116
+
+    (44) definicion -> lista_comp2 .
+
+    porc            reduce using rule 44 (definicion -> lista_comp2 .)
+
+
+state 117
+
+    (57) op -> mas .
+
+    var             reduce using rule 57 (op -> mas .)
+
+
+state 118
+
+    (71) op -> desigual .
+
+    var             reduce using rule 71 (op -> desigual .)
+
+
+state 119
+
+    (43) lista_comp -> acor porc definicion . porc ccor
+
+    porc            shift and go to state 152
+
+
+state 120
+
+    (65) op -> conjunc .
+
+    var             reduce using rule 65 (op -> conjunc .)
+
+
+state 121
+
+    (59) op -> mult .
+
+    var             reduce using rule 59 (op -> mult .)
+
+
+state 122
+
+    (61) op -> mod .
+
+    var             reduce using rule 61 (op -> mod .)
+
+
+state 123
+
+    (63) op -> negac .
+
+    var             reduce using rule 63 (op -> negac .)
+
+
+state 124
+
+    (46) lista_comp2 -> expr . dosptos caso_list dosptos expr
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    dosptos         shift and go to state 153
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 125
+
+    (64) op -> disyunc .
+
+    var             reduce using rule 64 (op -> disyunc .)
+
+
+state 126
+
+    (45) definicion -> cuantif .
+
+    porc            reduce using rule 45 (definicion -> cuantif .)
+
+
+state 127
+
+    (62) op -> exp .
+
+    var             reduce using rule 62 (op -> exp .)
+
+
+state 128
+
+    (68) op -> mayorigual .
+
+    var             reduce using rule 68 (op -> mayorigual .)
+
+
+state 129
+
+    (69) op -> menorigual .
+
+    var             reduce using rule 69 (op -> menorigual .)
+
+
+state 130
+
+    (60) op -> div .
+
+    var             reduce using rule 60 (op -> div .)
+
+
+state 131
+
+    (56) cuantif -> op . expr_var dosptos expr dosptos expr
+    (36) expr_var -> . var
+
+    var             shift and go to state 33
+
+    expr_var                       shift and go to state 154
+
+state 132
+
+    (40) lista_simpl -> acor contenido ccor .
+
+    acor            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    mas             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    menos           reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    mult            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    div             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    mod             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    exp             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    fby             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    tby             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    dosptos         reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    coma            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    ccor            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    end             reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    cpar            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    else            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+    porc            reduce using rule 40 (lista_simpl -> acor contenido ccor .)
+
+
+state 133
+
+    (49) elementos -> elementos coma . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 155
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 134
+
+    (51) expr_list -> expr_list acor expr_num ccor .
+
+    acor            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    ccor            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    mas             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    menos           reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    mult            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    div             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    mod             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    exp             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    fby             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    tby             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    else            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    end             reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    cpar            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    coma            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    dosptos         reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+    porc            reduce using rule 51 (expr_list -> expr_list acor expr_num ccor .)
+
+
+state 135
+
+    (22) asign -> variable coma asign coma . algo
+    (20) algo -> . expr
+    (21) algo -> . input
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    input           shift and go to state 74
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 75
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    algo                           shift and go to state 156
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 136
+
+    (95) seleccion -> if condicion then expr . else expr
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    else            shift and go to state 157
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 137
+
+    (78) binop_bool -> condicion disyunc condicion .
+    (77) binop_bool -> condicion . conjunc condicion
+    (78) binop_bool -> condicion . disyunc condicion
+
+    conjunc         reduce using rule 78 (binop_bool -> condicion disyunc condicion .)
+    disyunc         reduce using rule 78 (binop_bool -> condicion disyunc condicion .)
+    then            reduce using rule 78 (binop_bool -> condicion disyunc condicion .)
+    cpar            reduce using rule 78 (binop_bool -> condicion disyunc condicion .)
+
+  ! conjunc         [ shift and go to state 79 ]
+  ! disyunc         [ shift and go to state 78 ]
+
+
+state 138
+
+    (77) binop_bool -> condicion conjunc condicion .
+    (77) binop_bool -> condicion . conjunc condicion
+    (78) binop_bool -> condicion . disyunc condicion
+
+    conjunc         reduce using rule 77 (binop_bool -> condicion conjunc condicion .)
+    then            reduce using rule 77 (binop_bool -> condicion conjunc condicion .)
+    cpar            reduce using rule 77 (binop_bool -> condicion conjunc condicion .)
+    disyunc         shift and go to state 78
+
+  ! disyunc         [ reduce using rule 77 (binop_bool -> condicion conjunc condicion .) ]
+  ! conjunc         [ shift and go to state 79 ]
+
+
+state 139
+
+    (82) cond_parentizada -> apar condicion cpar .
+
+    conjunc         reduce using rule 82 (cond_parentizada -> apar condicion cpar .)
+    disyunc         reduce using rule 82 (cond_parentizada -> apar condicion cpar .)
+    then            reduce using rule 82 (cond_parentizada -> apar condicion cpar .)
+    cpar            reduce using rule 82 (cond_parentizada -> apar condicion cpar .)
+
+
+state 140
+
+    (94) bool_parentizado -> apar booleano cpar .
+
+    igual           reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    desigual        reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    mayor           reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    menor           reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    mayorigual      reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    menorigual      reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    conjunc         reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    disyunc         reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    then            reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+    cpar            reduce using rule 94 (bool_parentizado -> apar booleano cpar .)
+
+
+state 141
+
+    (84) booleano -> booleano desigual valor .
+
+    igual           reduce using rule 84 (booleano -> booleano desigual valor .)
+    desigual        reduce using rule 84 (booleano -> booleano desigual valor .)
+    mayor           reduce using rule 84 (booleano -> booleano desigual valor .)
+    menor           reduce using rule 84 (booleano -> booleano desigual valor .)
+    mayorigual      reduce using rule 84 (booleano -> booleano desigual valor .)
+    menorigual      reduce using rule 84 (booleano -> booleano desigual valor .)
+    then            reduce using rule 84 (booleano -> booleano desigual valor .)
+    conjunc         reduce using rule 84 (booleano -> booleano desigual valor .)
+    disyunc         reduce using rule 84 (booleano -> booleano desigual valor .)
+    cpar            reduce using rule 84 (booleano -> booleano desigual valor .)
+
+
+state 142
+
+    (83) booleano -> booleano igual valor .
+
+    igual           reduce using rule 83 (booleano -> booleano igual valor .)
+    desigual        reduce using rule 83 (booleano -> booleano igual valor .)
+    mayor           reduce using rule 83 (booleano -> booleano igual valor .)
+    menor           reduce using rule 83 (booleano -> booleano igual valor .)
+    mayorigual      reduce using rule 83 (booleano -> booleano igual valor .)
+    menorigual      reduce using rule 83 (booleano -> booleano igual valor .)
+    then            reduce using rule 83 (booleano -> booleano igual valor .)
+    conjunc         reduce using rule 83 (booleano -> booleano igual valor .)
+    disyunc         reduce using rule 83 (booleano -> booleano igual valor .)
+    cpar            reduce using rule 83 (booleano -> booleano igual valor .)
+
+
+state 143
+
+    (86) booleano -> booleano menor valor .
+
+    igual           reduce using rule 86 (booleano -> booleano menor valor .)
+    desigual        reduce using rule 86 (booleano -> booleano menor valor .)
+    mayor           reduce using rule 86 (booleano -> booleano menor valor .)
+    menor           reduce using rule 86 (booleano -> booleano menor valor .)
+    mayorigual      reduce using rule 86 (booleano -> booleano menor valor .)
+    menorigual      reduce using rule 86 (booleano -> booleano menor valor .)
+    then            reduce using rule 86 (booleano -> booleano menor valor .)
+    conjunc         reduce using rule 86 (booleano -> booleano menor valor .)
+    disyunc         reduce using rule 86 (booleano -> booleano menor valor .)
+    cpar            reduce using rule 86 (booleano -> booleano menor valor .)
+
+
+state 144
+
+    (87) booleano -> booleano mayorigual valor .
+
+    igual           reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    desigual        reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    mayor           reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    menor           reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    mayorigual      reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    menorigual      reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    then            reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    conjunc         reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    disyunc         reduce using rule 87 (booleano -> booleano mayorigual valor .)
+    cpar            reduce using rule 87 (booleano -> booleano mayorigual valor .)
+
+
+state 145
+
+    (88) booleano -> booleano menorigual valor .
+
+    igual           reduce using rule 88 (booleano -> booleano menorigual valor .)
+    desigual        reduce using rule 88 (booleano -> booleano menorigual valor .)
+    mayor           reduce using rule 88 (booleano -> booleano menorigual valor .)
+    menor           reduce using rule 88 (booleano -> booleano menorigual valor .)
+    mayorigual      reduce using rule 88 (booleano -> booleano menorigual valor .)
+    menorigual      reduce using rule 88 (booleano -> booleano menorigual valor .)
+    then            reduce using rule 88 (booleano -> booleano menorigual valor .)
+    conjunc         reduce using rule 88 (booleano -> booleano menorigual valor .)
+    disyunc         reduce using rule 88 (booleano -> booleano menorigual valor .)
+    cpar            reduce using rule 88 (booleano -> booleano menorigual valor .)
+
+
+state 146
+
+    (85) booleano -> booleano mayor valor .
+
+    igual           reduce using rule 85 (booleano -> booleano mayor valor .)
+    desigual        reduce using rule 85 (booleano -> booleano mayor valor .)
+    mayor           reduce using rule 85 (booleano -> booleano mayor valor .)
+    menor           reduce using rule 85 (booleano -> booleano mayor valor .)
+    mayorigual      reduce using rule 85 (booleano -> booleano mayor valor .)
+    menorigual      reduce using rule 85 (booleano -> booleano mayor valor .)
+    then            reduce using rule 85 (booleano -> booleano mayor valor .)
+    conjunc         reduce using rule 85 (booleano -> booleano mayor valor .)
+    disyunc         reduce using rule 85 (booleano -> booleano mayor valor .)
+    cpar            reduce using rule 85 (booleano -> booleano mayor valor .)
+
+
+state 147
+
+    (52) expr_list -> range apar expr coma . expr cpar
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 158
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 148
+
+    (26) tipo -> list of . int
+    (27) tipo -> list of . string
+
+    int             shift and go to state 159
+    string          shift and go to state 160
+
+
+state 149
+
+    (53) expr_tabl -> new table acor expr . ccor where asignes
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    ccor            shift and go to state 161
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 150
+
+    (31) leng -> len apar expr3 cpar .
+
+    mas             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    menos           reduce using rule 31 (leng -> len apar expr3 cpar .)
+    mult            reduce using rule 31 (leng -> len apar expr3 cpar .)
+    div             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    mod             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    exp             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    fby             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    tby             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    end             reduce using rule 31 (leng -> len apar expr3 cpar .)
+    cpar            reduce using rule 31 (leng -> len apar expr3 cpar .)
+    coma            reduce using rule 31 (leng -> len apar expr3 cpar .)
+    ccor            reduce using rule 31 (leng -> len apar expr3 cpar .)
+    dosptos         reduce using rule 31 (leng -> len apar expr3 cpar .)
+    else            reduce using rule 31 (leng -> len apar expr3 cpar .)
+    porc            reduce using rule 31 (leng -> len apar expr3 cpar .)
+    igual           reduce using rule 31 (leng -> len apar expr3 cpar .)
+    desigual        reduce using rule 31 (leng -> len apar expr3 cpar .)
+    mayor           reduce using rule 31 (leng -> len apar expr3 cpar .)
+    menor           reduce using rule 31 (leng -> len apar expr3 cpar .)
+    mayorigual      reduce using rule 31 (leng -> len apar expr3 cpar .)
+    menorigual      reduce using rule 31 (leng -> len apar expr3 cpar .)
+    conjunc         reduce using rule 31 (leng -> len apar expr3 cpar .)
+    disyunc         reduce using rule 31 (leng -> len apar expr3 cpar .)
+    then            reduce using rule 31 (leng -> len apar expr3 cpar .)
+
+
+state 151
+
+    (17) alc_var -> expr_var acor expr ccor . punto expr_var
+
+    punto           shift and go to state 162
+
+
+state 152
+
+    (43) lista_comp -> acor porc definicion porc . ccor
+
+    ccor            shift and go to state 163
+
+
+state 153
+
+    (46) lista_comp2 -> expr dosptos . caso_list dosptos expr
+    (47) caso_list -> . expr_list
+    (48) caso_list -> . var
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    var             shift and go to state 166
+    range           shift and go to state 9
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    caso_list                      shift and go to state 164
+    expr_list                      shift and go to state 165
+    lista_simpl                    shift and go to state 10
+
+state 154
+
+    (56) cuantif -> op expr_var . dosptos expr dosptos expr
+
+    dosptos         shift and go to state 167
+
+
+state 155
+
+    (49) elementos -> elementos coma expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    coma            reduce using rule 49 (elementos -> elementos coma expr .)
+    ccor            reduce using rule 49 (elementos -> elementos coma expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 156
+
+    (22) asign -> variable coma asign coma algo .
+
+    end             reduce using rule 22 (asign -> variable coma asign coma algo .)
+    coma            reduce using rule 22 (asign -> variable coma asign coma algo .)
+
+
+state 157
+
+    (95) seleccion -> if condicion then expr else . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 168
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    lista_simpl                    shift and go to state 10
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    expr_func                      shift and go to state 27
+
+state 158
+
+    (52) expr_list -> range apar expr coma expr . cpar
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    cpar            shift and go to state 169
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 159
+
+    (26) tipo -> list of int .
+
+    asignacion      reduce using rule 26 (tipo -> list of int .)
+    coma            reduce using rule 26 (tipo -> list of int .)
+
+
+state 160
+
+    (27) tipo -> list of string .
+
+    asignacion      reduce using rule 27 (tipo -> list of string .)
+    coma            reduce using rule 27 (tipo -> list of string .)
+
+
+state 161
+
+    (53) expr_tabl -> new table acor expr ccor . where asignes
+
+    where           shift and go to state 170
+
+
+state 162
+
+    (17) alc_var -> expr_var acor expr ccor punto . expr_var
+    (36) expr_var -> . var
+
+    var             shift and go to state 33
+
+    expr_var                       shift and go to state 171
+
+state 163
+
+    (43) lista_comp -> acor porc definicion porc ccor .
+
+    acor            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    coma            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    mas             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    menos           reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    mult            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    div             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    mod             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    exp             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    fby             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    tby             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    end             reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    cpar            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    ccor            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    dosptos         reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    else            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+    porc            reduce using rule 43 (lista_comp -> acor porc definicion porc ccor .)
+
+
+state 164
+
+    (46) lista_comp2 -> expr dosptos caso_list . dosptos expr
+
+    dosptos         shift and go to state 172
+
+
+state 165
+
+    (47) caso_list -> expr_list .
+    (51) expr_list -> expr_list . acor expr_num ccor
+
+    dosptos         reduce using rule 47 (caso_list -> expr_list .)
+    acor            shift and go to state 29
+
+
+state 166
+
+    (48) caso_list -> var .
+
+    dosptos         reduce using rule 48 (caso_list -> var .)
+
+
+state 167
+
+    (56) cuantif -> op expr_var dosptos . expr dosptos expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 173
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 168
+
+    (95) seleccion -> if condicion then expr else expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    end             reduce using rule 95 (seleccion -> if condicion then expr else expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 169
+
+    (52) expr_list -> range apar expr coma expr cpar .
+
+    acor            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    ccor            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    mas             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    menos           reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    mult            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    div             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    mod             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    exp             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    fby             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    tby             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    else            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    end             reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    cpar            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    coma            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    dosptos         reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+    porc            reduce using rule 52 (expr_list -> range apar expr coma expr cpar .)
+
+
+state 170
+
+    (53) expr_tabl -> new table acor expr ccor where . asignes
+    (54) asignes -> . variable asignacion algo
+    (55) asignes -> . asignes coma asignes
+    (23) variable -> . var dosptos tipo
+
+    var             shift and go to state 72
+
+    variable                       shift and go to state 174
+    asignes                        shift and go to state 175
+
+state 171
+
+    (17) alc_var -> expr_var acor expr ccor punto expr_var .
+
+    mas             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    menos           reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    mult            reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    div             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    mod             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    exp             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    fby             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    tby             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    porc            reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    dosptos         reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    end             reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    cpar            reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    coma            reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    ccor            reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+    else            reduce using rule 17 (alc_var -> expr_var acor expr ccor punto expr_var .)
+
+
+state 172
+
+    (46) lista_comp2 -> expr dosptos caso_list dosptos . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 176
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 173
+
+    (56) cuantif -> op expr_var dosptos expr . dosptos expr
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    dosptos         shift and go to state 177
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 174
+
+    (54) asignes -> variable . asignacion algo
+
+    asignacion      shift and go to state 178
+
+
+state 175
+
+    (53) expr_tabl -> new table acor expr ccor where asignes .
+    (55) asignes -> asignes . coma asignes
+
+  ! shift/reduce conflict for coma resolved as shift
+    cpar            reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    mas             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    menos           reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    mult            reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    div             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    mod             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    exp             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    fby             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    tby             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    end             reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    ccor            reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    dosptos         reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    else            reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    porc            reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .)
+    coma            shift and go to state 179
+
+  ! coma            [ reduce using rule 53 (expr_tabl -> new table acor expr ccor where asignes .) ]
+
+
+state 176
+
+    (46) lista_comp2 -> expr dosptos caso_list dosptos expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    porc            reduce using rule 46 (lista_comp2 -> expr dosptos caso_list dosptos expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 177
+
+    (56) cuantif -> op expr_var dosptos expr dosptos . expr
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 180
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 178
+
+    (54) asignes -> variable asignacion . algo
+    (20) algo -> . expr
+    (21) algo -> . input
+    (4) expr -> . expr_num
+    (5) expr -> . alc_var
+    (6) expr -> . expr_cad
+    (7) expr -> . expr_func
+    (8) expr -> . expr_list
+    (9) expr -> . expr_tabl
+    (10) expr -> . expr mas expr
+    (11) expr -> . expr menos expr
+    (12) expr -> . expr mult expr
+    (13) expr -> . expr div expr
+    (14) expr -> . expr mod expr
+    (15) expr -> . expr exp expr
+    (18) expr -> . apar expr cpar
+    (35) expr -> . menos expr
+    (29) expr_num -> . num
+    (30) expr_num -> . leng
+    (16) alc_var -> . expr_var
+    (17) alc_var -> . expr_var acor expr ccor punto expr_var
+    (37) expr_cad -> . cadena
+    (96) expr_func -> . expr_fby
+    (97) expr_func -> . expr_tby
+    (38) expr_list -> . lista_simpl
+    (39) expr_list -> . lista_comp
+    (51) expr_list -> . expr_list acor expr_num ccor
+    (52) expr_list -> . range apar expr coma expr cpar
+    (53) expr_tabl -> . new table acor expr ccor where asignes
+    (31) leng -> . len apar expr3 cpar
+    (36) expr_var -> . var
+    (98) expr_fby -> . expr fby expr
+    (99) expr_tby -> . expr tby varia
+    (40) lista_simpl -> . acor contenido ccor
+    (43) lista_comp -> . acor porc definicion porc ccor
+
+    input           shift and go to state 74
+    apar            shift and go to state 15
+    menos           shift and go to state 6
+    num             shift and go to state 21
+    cadena          shift and go to state 8
+    range           shift and go to state 9
+    new             shift and go to state 13
+    len             shift and go to state 19
+    var             shift and go to state 33
+    acor            shift and go to state 28
+
+    lista_comp                     shift and go to state 17
+    leng                           shift and go to state 16
+    expr                           shift and go to state 75
+    expr_var                       shift and go to state 23
+    expr_cad                       shift and go to state 18
+    expr_num                       shift and go to state 25
+    expr_tabl                      shift and go to state 26
+    expr_func                      shift and go to state 27
+    algo                           shift and go to state 181
+    expr_list                      shift and go to state 3
+    expr_tby                       shift and go to state 20
+    alc_var                        shift and go to state 14
+    expr_fby                       shift and go to state 11
+    lista_simpl                    shift and go to state 10
+
+state 179
+
+    (55) asignes -> asignes coma . asignes
+    (54) asignes -> . variable asignacion algo
+    (55) asignes -> . asignes coma asignes
+    (23) variable -> . var dosptos tipo
+
+    var             shift and go to state 72
+
+    variable                       shift and go to state 174
+    asignes                        shift and go to state 182
+
+state 180
+
+    (56) cuantif -> op expr_var dosptos expr dosptos expr .
+    (10) expr -> expr . mas expr
+    (11) expr -> expr . menos expr
+    (12) expr -> expr . mult expr
+    (13) expr -> expr . div expr
+    (14) expr -> expr . mod expr
+    (15) expr -> expr . exp expr
+    (98) expr_fby -> expr . fby expr
+    (99) expr_tby -> expr . tby varia
+
+    porc            reduce using rule 56 (cuantif -> op expr_var dosptos expr dosptos expr .)
+    mas             shift and go to state 58
+    menos           shift and go to state 59
+    mult            shift and go to state 62
+    div             shift and go to state 61
+    mod             shift and go to state 63
+    exp             shift and go to state 60
+    fby             shift and go to state 57
+    tby             shift and go to state 55
+
+
+state 181
+
+    (54) asignes -> variable asignacion algo .
+
+    mas             reduce using rule 54 (asignes -> variable asignacion algo .)
+    menos           reduce using rule 54 (asignes -> variable asignacion algo .)
+    mult            reduce using rule 54 (asignes -> variable asignacion algo .)
+    div             reduce using rule 54 (asignes -> variable asignacion algo .)
+    mod             reduce using rule 54 (asignes -> variable asignacion algo .)
+    exp             reduce using rule 54 (asignes -> variable asignacion algo .)
+    fby             reduce using rule 54 (asignes -> variable asignacion algo .)
+    tby             reduce using rule 54 (asignes -> variable asignacion algo .)
+    end             reduce using rule 54 (asignes -> variable asignacion algo .)
+    cpar            reduce using rule 54 (asignes -> variable asignacion algo .)
+    coma            reduce using rule 54 (asignes -> variable asignacion algo .)
+    ccor            reduce using rule 54 (asignes -> variable asignacion algo .)
+    dosptos         reduce using rule 54 (asignes -> variable asignacion algo .)
+    else            reduce using rule 54 (asignes -> variable asignacion algo .)
+    porc            reduce using rule 54 (asignes -> variable asignacion algo .)
+
+
+state 182
+
+    (55) asignes -> asignes coma asignes .
+    (55) asignes -> asignes . coma asignes
+
+  ! shift/reduce conflict for coma resolved as shift
+    mas             reduce using rule 55 (asignes -> asignes coma asignes .)
+    menos           reduce using rule 55 (asignes -> asignes coma asignes .)
+    mult            reduce using rule 55 (asignes -> asignes coma asignes .)
+    div             reduce using rule 55 (asignes -> asignes coma asignes .)
+    mod             reduce using rule 55 (asignes -> asignes coma asignes .)
+    exp             reduce using rule 55 (asignes -> asignes coma asignes .)
+    fby             reduce using rule 55 (asignes -> asignes coma asignes .)
+    tby             reduce using rule 55 (asignes -> asignes coma asignes .)
+    end             reduce using rule 55 (asignes -> asignes coma asignes .)
+    cpar            reduce using rule 55 (asignes -> asignes coma asignes .)
+    ccor            reduce using rule 55 (asignes -> asignes coma asignes .)
+    dosptos         reduce using rule 55 (asignes -> asignes coma asignes .)
+    else            reduce using rule 55 (asignes -> asignes coma asignes .)
+    porc            reduce using rule 55 (asignes -> asignes coma asignes .)
+    coma            shift and go to state 179
+
+  ! coma            [ reduce using rule 55 (asignes -> asignes coma asignes .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for mas in state 75 resolved as shift
+WARNING: shift/reduce conflict for menos in state 75 resolved as shift
+WARNING: shift/reduce conflict for mult in state 75 resolved as shift
+WARNING: shift/reduce conflict for div in state 75 resolved as shift
+WARNING: shift/reduce conflict for mod in state 75 resolved as shift
+WARNING: shift/reduce conflict for exp in state 75 resolved as shift
+WARNING: shift/reduce conflict for fby in state 75 resolved as shift
+WARNING: shift/reduce conflict for tby in state 75 resolved as shift
+WARNING: shift/reduce conflict for cpar in state 81 resolved as shift
+WARNING: shift/reduce conflict for coma in state 175 resolved as shift
+WARNING: shift/reduce conflict for coma in state 182 resolved as shift
