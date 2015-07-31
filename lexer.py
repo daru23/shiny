@@ -1,13 +1,21 @@
 # lexer.py
-# Daniela Ruiz
+#########################  English  Version #########################################
+# Convert a sequence of characters (such as a computer program or web page) into a 
+# sequence of tokens (strings with an identified "meaning")
+#########################  Spanish Version ##########################################
+# 
+#  
+# Author
+# Daniela Ruiz - daru015@gmail.com
 # Diego Millan 
-#------------------------------------------------------------------------------#
+#####################################################################################
 import ply.lex as lex
 import sys
 sys.path.append("../..")
 from ply import *
-#------------------------------------------------------------------------------#
-# Palabras reservadas
+#####################################################################################
+# Reserverd Words / Palabras Reservadas
+#####################################################################################
 reserved = {	    'int'	: 'int',	
 					'string': 'string',
 					'list'	: 'list',
@@ -26,15 +34,17 @@ reserved = {	    'int'	: 'int',
 					'where'	: 'where',
 					'new'	: 'new',
 					}
-
-# Lista de tokens
+#####################################################################################
+# Token list / Lista de tokens
+#####################################################################################
 tokens = ['var','num','cadena','acor','ccor','apar','cpar',
 			'porc','punto','coma','dosptos','conjunc',
 			'disyunc','negac','igual','desigual','mayor','menor','mayorigual',
 			'menorigual','mas','menos','mult','div','mod','exp',
 			'asignacion','begin','end',] + list(reserved.values())
-
-# Expresiones Regulares
+#####################################################################################
+# Regular Expressions / Expresiones Regulares
+#####################################################################################
 t_int				= r'int'
 t_acor				= r'\['
 t_ccor				= r'\]'
@@ -86,12 +96,15 @@ def t_newline(t):
 	t.lexer.lineno += len(t.value)
 
 t_ignore  = ' \t'
-
-#------------------------- Manejador de Errores -------------------------------#
+#####################################################################################
+# ERROR HANDLER / MANEJADOR DE ERRORES
+#####################################################################################
 def t_error(t):
 	print "Illegal character '%s'" % t.value[0]
 	print t.value
 	t.lexer.skip(1)
-#------------------------- Constructor del Lexer ------------------------------#
+#####################################################################################
+# Lexer Constructor /  Constructor del Lexer 
+#####################################################################################
 lexer = lex.lex()
 

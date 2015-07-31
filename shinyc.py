@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 # shinyc.py
-# El html intermedio es devuelto en un archivo de texto .sel y es impreso por
-# pantalla
-# El grafo se muestra generando un archivo grafo.png que se guarda en la carpeta
-# Daniela Ruiz
+#########################  English  Version #########################################
+# The HTML intermedy is return in a file .sel and printed by console
+# The graph is generate in a file grafo.png 
+#########################  Spanish Version ##########################################
+# El html intermedio es devuelto en un archivo de texto .sel y es impreso por console
+# El grafo se muestra generando un archivo grafo.png 
+# Author
+# Daniela Ruiz - daru015@gmail.com
 # Diego Millan 
+#####################################################################################
 import sys
 import re
 import os.path
@@ -13,13 +18,17 @@ from parser import parser
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
-#------------------------------------------------------------------------------#
+#####################################################################################
 # function representacion
-#     Funcion que transforma el archivo html de entrada a otra representacion 
-#     intermedia del mismo.
-# parametros: String: archivo es el archivo html que va en la entrada del
-# programa            
-# retorna: String: Con la represetacion intermedia del html que entró.
+######################### English Version ###########################################
+#     Transform the HTML file to another intermedy representation
+# @param  : String - HTML file input
+# @return : String - File output 
+######################## Spanish Version ############################################
+#     Transforma el archivo html en otra representacion intermedia del mismo.
+# @param  : String: archivo es el archivo html que va en la entrada 
+# @return : String: Con la represetacion intermedia del html que entró.
+#####################################################################################
 def representacion(archivo):
 	archivo_actual = open(archivo,"r")
 	contenido = archivo_actual.read()
@@ -59,12 +68,18 @@ def representacion(archivo):
 	salida = outpantalla.read() 
 	print "Representacion Intermedia:"
 	print salida						
-#------------------------------------------------------------------------------#
+
+#####################################################################################
 # function tagsForParse
+######################### English Version ###########################################
+#     Return the ShinyEL tags that should be parse
+# @param  : String : HTML file input
+# @return : List of tags that should be parse
+######################### Spanish Version ###########################################
 #     Funcion que devuelve los tags ShinyEL que deben ser parseados
-# parametros: String: archivo es el archivo html que va en la entrada del
-#             programa          
-# retorna: Lista con todos los tags que deben ser parseados.		
+# @param : String: archivo es el archivo html que va en la entrada
+# @return : Lista con todos los tags que deben ser parseados
+#####################################################################################
 def tagsForParse(archivo):
 	archivo_actual = open(archivo,"r")
 	contenido = archivo_actual.read()
@@ -75,7 +90,7 @@ def tagsForParse(archivo):
 		shiny = objeto
 	archivo_actual.close()	
 	return shiny		
-#---------------------------------Main-----------------------------------------#
+#-------------------------------------Main------------------------------------------#
 if(len(sys.argv) > 1):	
 	if os.path.exists(sys.argv[1]):
 		print "Archivo de Entrada.."

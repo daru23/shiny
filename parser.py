@@ -1,12 +1,29 @@
+# -*- coding: utf-8 -*-
 # parser.py 
-# Daniela Ruiz
-# Diego Millan
+#########################  English  Version #########################################
+#  Transforms the input on a tree branch
+#########################  Spanish Version ##########################################
+# Transforma la entrada en un árbol de derivación
+# Author
+# Daniela Ruiz - daru015@gmail.com
+# Diego Millan 
+#####################################################################################
 import ply.yacc as yacc
 from lexer import tokens
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
-#---------------------- Funcion Auxiliar Flatten ------------------------------#
+####################################################################################
+# function flatten
+######################### English Version ###########################################
+#     Flatten a list
+# @param  : List
+# @return : List
+######################## Spanish Version ############################################
+#     Aplana una lista
+# @param  : List 
+# @return : List
+#####################################################################################
 def flatten(x):
     flat = True
     ans = []
@@ -16,9 +33,13 @@ def flatten(x):
         else:
             ans.append(i)
     return ans
-#----------------- Grafo de Dependencia de Variables --------------------------#
+#####################################################################################
+# Variable Dependency Graph / Grafo de Dependencia de Variables
+#####################################################################################
 G = nx.DiGraph() 
-#------------------------ Precedencia -----------------------------------------#
+#####################################################################################
+# Precedence / Precedencia
+#####################################################################################
 precedence = (
     ('left', 'tby'),
     ('right', 'fby'),
@@ -31,16 +52,22 @@ precedence = (
     ('left','exp'),
     ('right','umenos','negac'),
     )
-#-------------------------- Tabla de Simbolos ---------------------------------#
+#####################################################################################
+# Precedence Table / Tabla de Simbolos
+#####################################################################################
 tab_simb = { }
-#-------------------------- Estado Inicial ------------------------------------#
+#####################################################################################
+# Initial State / Estado Inicial
+#####################################################################################
 def p_estados(t):
     '''programa : begin asign end
                 | begin expr end
                 | begin seleccion end'''
     t[0] = G
     print 'programa : '+ str(t[1])+' '+str(t[2])+' '+str(t[3])
-#-----------------------------   Expresiones ----------------------------------#
+#####################################################################################
+# Expressions / Expresiones
+#####################################################################################
 def p_expresiones2(t):
     '''expr  : expr_num
              | alc_var
@@ -74,7 +101,9 @@ def p_exp_parentizada(t):
     'expr : apar expr cpar'
     t[0] = t[2]
     print 'expr : '+str(t[1])+' '+str(t[2])+' '+str(t[3])
-#------------------------ Asignacion ------------------------------------------#
+#####################################################################################
+# Assignation / Asignacion
+#####################################################################################
 def p_asignacion(t):
     'asign : variable asignacion algo'
     tab_simb[t[1]] = t[3]
@@ -137,8 +166,9 @@ def p_tipo(t):
     elif t[1] == 'table':
         t[0] = t[1]
         print 'tipo : '+str(t[1])
-
-#------------------------ Expresiones para Enteros ----------------------------#
+#####################################################################################
+# Expressions for Integers / Expresiones para Enteros
+#####################################################################################
 def p_binop1(t):
     '''expr_num : num
                 | leng'''
@@ -168,14 +198,16 @@ def p_exp_variable2(t):
     t[0] = t[1]
     G.add_node(t[1])
     print 'expr_var : '+str(t[1])
-
-#------------------------- Expresiones para Cadenas ---------------------------#
+#####################################################################################
+# Expressions for Strings / Expresiones para Cadenas
+#####################################################################################
 def p_exp_cadenas(t):
     'expr_cad : cadena'
     t[0] = t[1]
     print 'expr_cad : '+str(t[1])
-
-#------------------------- Expresiones para Listas ----------------------------#
+#####################################################################################
+# Expressions for Lists / Expresiones para Listas
+#####################################################################################
 def p_lista(t):
     '''expr_list : lista_simpl
                  | lista_comp'''
@@ -234,7 +266,9 @@ def p_range(t):
     'expr_list : range apar expr coma expr cpar'
     t[0] = t[3]
     print 'expr_list : '+str(t[1])+' '+str(t[2])+' '+str(t[3])+' '+str(t[4])+' '+str(t[5])+' '+str(t[6])
-#------------------------ Expresiones de Tablas -------------------------------#
+#####################################################################################
+# Expressions for Tables / Expresiones para Tablas
+#####################################################################################
 def p_expr_table(t):
     'expr_tabl : new table acor expr ccor where asignes'
     t[0] = t[4]
@@ -250,7 +284,9 @@ def p_asignes2(t):
     'asignes : asignes coma asignes'
     t[0] = t[3]    
     print 'asignes : '+str(t[1])+' '+str(t[2])+' '+str(t[3])
-#------------------------ Expreseiones de Cuantificadores ---------------------#
+#####################################################################################
+# Expressions for Quantifiers / Expresiones para Cuantificadores 
+#####################################################################################
 # [% operador variable : lista : expresion %]
 def p_cuantif(t):
     'cuantif : op expr_var dosptos expr dosptos expr'
@@ -275,7 +311,9 @@ def p_operador(t):
           | desigual'''
     t[0] = t[1]
     print 'op : '+str(t[1])
-#------------------------ Operadores Booleanos --------------------------------#
+#####################################################################################
+# Boolean Operators / Operadores Booleanos 
+#####################################################################################
 def p_condicion(t): 
     '''condicion : term_b
                  | booleano
@@ -335,14 +373,17 @@ def p_booleano_parentizado(t):
     'bool_parentizado : apar booleano cpar'
     t[0] = t[2]
     print 'bool_parentizado : '+str(t[1])+' '+str(t[2])+' '+str(t[3])
-#----------------------------- Seleccion --------------------------------------#
+#####################################################################################
+# Selection / Seleccion
+#####################################################################################
 def p_seleccion(t):
     'seleccion : if condicion then expr else expr'
     if   t[2]: t[0] = t[4]
     else:      t[0] = t[6]
     print 'seleccion : '+str(t[1])+' '+str(t[2])+' '+str(t[3])+' '+str(t[4])+' '+str(t[5])+' '+str(t[6])
-#---------------------------- Funciones ---------------------------------------#
-
+#####################################################################################
+# Functions / Funciones
+#####################################################################################
 def p_func(t):
     '''expr_func : expr_fby
                  | expr_tby'''
@@ -382,13 +423,17 @@ def p_tby2(t):
 def p_empty(p):
     'empty :'
     pass
-
-#------------------- MANEJOR DE ERRORES SINTACTICOS ---------------------------#
+#####################################################################################
+# HANDLER SYNTAX ERRORS / MANEJOR DE ERRORES SINTACTICOS ---------
+#####################################################################################
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
-#----------------------- Constructor del Parser -------------------------------#
+#####################################################################################
+#----------------- Parser Builder / Constructor del Parser -------------------------#
+#####################################################################################
 parser = yacc.yacc(errorlog=yacc.NullLogger())
 
+#-----------------------------------------------------------------------------------#
 #while True:
 #   try:
 #       s = raw_input('Regla: ')
